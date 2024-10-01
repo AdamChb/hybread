@@ -174,7 +174,7 @@ export default {
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 /* Animations */
 @keyframes fadeIn {
   0% {

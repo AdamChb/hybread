@@ -82,7 +82,7 @@ function closeUnroll() {
   </header>
 </template>
 
-<style>
+<style scoped>
 /* Animations */
 @keyframes fadeIn {
   0% {

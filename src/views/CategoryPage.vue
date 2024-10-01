@@ -97,7 +97,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 #category {
   background-image: url("../assets/bg.jpeg");
   background-size: cover;

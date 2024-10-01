@@ -24,22 +24,24 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 #content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: auto;
   min-height: 50vh;
-  width: 100vw;
-  background-image: url(@/assets/background.png);
+  width: 100%;
+  padding: 4em 0 2em 0;
+  background-image: url(@/assets/bg.jpeg);
   background-size: cover;
 }
 
 #form {
-  padding: 2.5em;
-  height: 60vh;
+  height: auto;
   width: 36vw;
+  padding: 2.5em;
+  margin: 2em 0 2em 0;
   min-height: 40vh;
   background-color: #ffffff;
   border-radius: 25px;
@@ -82,5 +84,23 @@
 #signup a {
   color: #0a859a;
   text-decoration: none;
+}
+
+@media (max-width: 1000px) {
+  #form {
+    width: 50vw;
+  }
+}
+
+@media (max-width: 768px) {
+  #form {
+    width: 60vw;
+  }
+}
+
+@media (max-width: 480px) {
+  #form {
+    width: 70vw;
+  }
 }
 </style>

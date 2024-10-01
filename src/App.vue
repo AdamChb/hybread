@@ -1,6 +1,11 @@
 <script>
 import HeaderHybRead from "./components/HeaderHybRead";
 import FooterHybRead from "./components/FooterHybRead";
+/*import BookView from "./views/BookView.vue";
+import HomePage from "./views/HomePage.vue";
+import CategoryPage from "./views/CategoryPage.vue";
+import About from "./views/About.vue";
+import { createRouter, createWebHistory } from "vue-router";*/
 
 export default {
   name: "App",
@@ -12,13 +17,16 @@ export default {
 </script>
 
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <HeaderHybRead />
   <router-view />
   <FooterHybRead />
+  <nav>
+    <router-link to="/">HomePage</router-link> |
+    <router-link to="/category">CategoryPage</router-link> |
+    <router-link to="/Homepageloggedin">HomepageLoggedin</router-link> |
+    <router-link to="/signin">SignIn</router-link> |
+    <router-link to="/login">Login</router-link> |
+  </nav>
 </template>
 
 <style>

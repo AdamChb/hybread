@@ -1,11 +1,11 @@
 <template>
   <footer>
-    <img src="../assets/logo_header.svg" />
+    <img src="@/assets/logo_header.svg" />
     <p>© 2024 Mathias BENOIT – Adam CHABA – Eva MAROT – Sacha PORTAL</p>
   </footer>
 </template>
 
-<style>
+<style scoped>
 footer {
   background-color: white;
   height: 100px;
