@@ -3,7 +3,7 @@
 <template>
   <div id="content">
     <div id="form">
-      <h1 id="title">Sign Up</h1>
+      <h1 id="title">SigU p</h1>
       <form>
         <label class="subject" for="username">Username</label>
         <input
