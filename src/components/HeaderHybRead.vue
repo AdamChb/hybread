@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 let i = ref(0);
 let timeoutId = null;
 const toggleMenu = () => {
@@ -12,18 +12,18 @@ const toggleMenu = () => {
     document.querySelector(".header_nav_burger").classList.toggle("animgate");
   }
   i.value = 1;
-}
+};
 //  functions for opening and closing the dropdown
 function openUnroll() {
   if (timeoutId) {
     clearTimeout(timeoutId); // Cancel the closing of the dropdown if the mouse enters again
   }
-  document.getElementById('dropdown').style.display = 'block';
+  document.getElementById("dropdown").style.display = "block";
 }
 
 function closeUnroll() {
   timeoutId = setTimeout(() => {
-    document.getElementById('dropdown').style.display = 'none';
+    document.getElementById("dropdown").style.display = "none";
   }, 300); // 300ms delay before closing the dropdown
 }
 </script>
@@ -32,21 +32,21 @@ function closeUnroll() {
   <header>
     <!-- Header for pc -->
     <nav id="pc">
-        <a href="./index.html" class="header_logo">
-            <img src="../assets/logo_header.svg" alt="Logo Hybread">
-        </a>
-        <div @mouseenter="openUnroll" @mouseleave="closeUnroll">
-          <div class="categories">Categories</div>
-          <ul id="dropdown">
-            <li><a href="">Science Fiction</a></li>
-            <li><a href="">Mystery & Thriller</a></li>
-            <li><a href="">Children's Books</a></li>
-            <li><a href="">Educational</a></li>
-            <li><a href="">Historical</a></li>
-          </ul>
-        </div>
-        <input type="text" placeholder="Research a book" class="searchbar">
-        <a href="" class="button">Log in</a>
+      <a href="./index.html" class="header_logo">
+        <img src="../assets/logo_header.svg" alt="Logo Hybread" />
+      </a>
+      <div @mouseenter="openUnroll" @mouseleave="closeUnroll">
+        <div class="categories">Categories</div>
+        <ul id="dropdown">
+          <li><a href="">Science Fiction</a></li>
+          <li><a href="">Mystery & Thriller</a></li>
+          <li><a href="">Children's Books</a></li>
+          <li><a href="">Educational</a></li>
+          <li><a href="">Historical</a></li>
+        </ul>
+      </div>
+      <input type="text" placeholder="Research a book" class="searchbar" />
+      <a href="" class="button">Log in</a>
     </nav>
 
     <!-- Header for mobile -->
@@ -159,9 +159,9 @@ nav a,
 }
 
 .categories:hover {
-    color: #0A859A;
-    transform: scale(1.10);
-    transition: 0.3s;
+  color: #0a859a;
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 .button {
@@ -199,15 +199,15 @@ nav a,
 #pc ul li {
   list-style: none;
   padding: 0.6em 0;
-  transition: .3s;
+  transition: 0.3s;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
 }
 #pc ul li:hover {
   background-color: #effdff;
-  transition: .3s;
-  color: #0A859A;
+  transition: 0.3s;
+  color: #0a859a;
   border-radius: 0.5em;
 }
 

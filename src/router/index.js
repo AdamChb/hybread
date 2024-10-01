@@ -4,38 +4,32 @@ const routes = [
   {
     path: "/",
     name: "HomePage",
-    component: () =>
-      import("../views/HomePage.vue"),
+    component: () => import("../views/HomePage.vue"),
   },
   {
     path: "/bookView",
     name: "BookView",
-    component: () =>
-      import("../views/BookView.vue"),
+    component: () => import("../views/BookView.vue"),
   },
   {
     path: "/categoryPage",
     name: "CategoryPage",
-    component: () =>
-      import("../views/CategoryPage.vue"),
+    component: () => import("../views/CategoryPage.vue"),
   },
   {
     path: "/homepageLoggedin",
     name: "HomepageLoggedin",
-    component: () =>
-      import("../views/HomepageLoggedin.vue"),
+    component: () => import("../views/HomepageLoggedin.vue"),
   },
   {
     path: "/logIn",
     name: "LogIn",
-    component: () =>
-      import("../views/LogIn.vue"),
+    component: () => import("../views/LogIn.vue"),
   },
   {
     path: "/signIn",
     name: "SignIn",
-    component: () =>
-      import("../views/SignIn.vue"),
+    component: () => import("../views/SignIn.vue"),
   },
 ];
 
