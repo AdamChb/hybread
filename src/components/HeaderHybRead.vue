@@ -33,7 +33,7 @@ function closeUnroll() {
     <!-- Header for pc -->
     <nav id="pc">
         <a href="./index.html" class="header_logo">
-            <img src="../assets/img/logo_header.svg" alt="Logo Hybread">
+            <img src="../assets/logo_header.svg" alt="Logo Hybread">
         </a>
         <div @mouseenter="openUnroll" @mouseleave="closeUnroll">
           <div class="categories">Categories</div>
@@ -53,7 +53,7 @@ function closeUnroll() {
     <div id="tel">
       <div id="header_tel">
         <a href="./index.html" class="header_logo">
-          <img src="../assets/img/logo_header.svg" alt="Logo Hybread" />
+          <img src="../assets/logo_header.svg" alt="Logo Hybread" />
         </a>
 
         <!-- Burger button -->

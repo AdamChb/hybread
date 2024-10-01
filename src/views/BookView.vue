@@ -2,7 +2,7 @@
   <div class="book-container">
     <!-- Book image -->
     <div class="book-image">
-      <img src="../assets/img/book_cover.png" alt="Book Cover" />
+      <img src="../assets/book_cover.png" alt="Book Cover" />
     </div>
     <!-- Book description -->
     <div class="book-info">
@@ -46,7 +46,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/img/bg.jpeg");
+  background-image: url("../assets/bg.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

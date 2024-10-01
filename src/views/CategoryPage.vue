@@ -4,42 +4,42 @@ export default {
     return {
       books: [
         {
-          cover: "src/assets/img/book1.jpg",
+          cover: "src/assets/book1.jpg",
           name: "The Safe Place",
           author: "Anna Downes",
           likes: 1,
           liked: false,
         },
         {
-          cover: "src/assets/img/book2.jpg",
+          cover: "src/assets/book2.jpg",
           name: "House of Glass",
           author: "Sarah Pekkanen",
           likes: 2,
           liked: false,
         },
         {
-          cover: "src/assets/img/book3.jpg",
+          cover: "src/assets/book3.jpg",
           name: "Till Death Do Us Part",
           author: "Laure Elizabeth Flynn",
           likes: 3,
           liked: false,
         },
         {
-          cover: "src/assets/img/book1.jpg",
+          cover: "src/assets/book1.jpg",
           name: "The Safe Place",
           author: "Anna Downes",
           likes: 1,
           liked: false,
         },
         {
-          cover: "src/assets/img/book2.jpg",
+          cover: "src/assets/imbook2.jpg",
           name: "House of Glass",
           author: "Sarah Pekkanen",
           likes: 2,
           liked: false,
         },
         {
-          cover: "src/assets/img/book3.jpg",
+          cover: "src/assets/book3.jpg",
           name: "Till Death Do Us Part",
           author: "Laure Elizabeth Flynn",
           likes: 3,
@@ -66,7 +66,7 @@ export default {
     <!-- TEMP : name category -->
     <h2>Mystery & Thriller</h2>
     <div class="shelf">
-      <div class="book" v-for="book in books">
+      <div class="book" v-for="book in books" :key="book.id">
         <img :src="book.cover" alt="book cover" />
         <h3>{{ book.name }}</h3>
         <p class="author">{{ book.author }}</p>
@@ -77,7 +77,7 @@ export default {
               toLike(book);
               console.log(book);
             "
-            src="../assets/img/not-liked.svg"
+            src="../assets/not-liked.svg"
             alt="like icon"
           />
           <img
@@ -86,7 +86,7 @@ export default {
               unLike(book);
               console.log('uwu');
             "
-            src="../assets/img/liked.svg"
+            src="../assets/liked.svg"
             alt="like icon"
           />
           {{ book.likes }}
@@ -99,7 +99,7 @@ export default {
 
 <style>
 #category {
-  background-image: url("../assets/img/bg.jpeg");
+  background-image: url("../assets/bg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

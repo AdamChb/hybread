@@ -49,7 +49,7 @@
   height: 100vh;
   min-height: 50vh;
   width: 100vw;
-  background-image: url(@/assets/img/background.png);
+  background-image: url(@/assets/background.png);
   background-size: cover;
 }
 
