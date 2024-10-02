@@ -1,11 +1,6 @@
 <script>
 import HeaderHybRead from "./components/HeaderHybRead";
 import FooterHybRead from "./components/FooterHybRead";
-/*import BookView from "./views/BookView.vue";
-import HomePage from "./views/HomePage.vue";
-import CategoryPage from "./views/CategoryPage.vue";
-import About from "./views/About.vue";
-import { createRouter, createWebHistory } from "vue-router";*/
 
 export default {
   name: "App",
@@ -26,6 +21,7 @@ export default {
     <router-link to="/Homepageloggedin">HomepageLoggedin</router-link> |
     <router-link to="/signin">SignIn</router-link> |
     <router-link to="/login">Login</router-link> |
+    <router-link to="/account">AccountPage</router-link> |
   </nav>
 </template>
 
