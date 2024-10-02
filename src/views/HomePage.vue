@@ -5,7 +5,7 @@ export default {
     return {
       books: [
         {
-          cover: "src/assets/book1.jpg",
+          cover: "../assets/img/book1;jpg",
           name: "The Safe Place",
           author: "Anna Downes",
           likes: 1,
@@ -123,6 +123,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.3);
   transition: 0.3s;
   animation: fadeInLeft ease 1.5s;
+  margin-top: 2em;
 }
 .cta-button:hover {
   transform: scale(1.04);
@@ -168,7 +169,7 @@ h1 {
   align-items: flex-start;
   flex-direction: column;
   text-align: center;
-  padding: 10vw;
+  padding: 3vw 7vw;
   height: auto;
   width: 100%;
   color: white;

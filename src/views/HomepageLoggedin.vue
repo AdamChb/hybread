@@ -4,7 +4,7 @@ export default {
     return {
       books: [
         {
-          cover: "src/assets/book1.jpg",
+          cover: "../assets/img/book1;jpg",
           name: "The Safe Place",
           author: "Anna Downes",
           likes: 1,
