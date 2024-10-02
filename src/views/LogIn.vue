@@ -5,7 +5,7 @@
     <div id="form">
       <h1 id="title">Log In</h1>
       <form>
-        <label for="email" class="subject">Email</label>
+        <label for="email" class="subject">Username</label>
         <input class="input" type="email" id="email" name="email" required />
         <label for="password" class="subject">Password</label>
         <input

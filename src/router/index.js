@@ -12,7 +12,7 @@ const routes = [
     component: () => import("../views/BookView.vue"),
   },
   {
-    path: "/categoryPage",
+    path: "/category",
     name: "CategoryPage",
     component: () => import("../views/CategoryPage.vue"),
   },
