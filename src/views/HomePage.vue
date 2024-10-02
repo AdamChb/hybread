@@ -25,6 +25,27 @@ export default {
           likes: 3,
           liked: false,
         },
+        {
+          cover: "/book1.jpg",
+          name: "The Safe Place",
+          author: "Anna Downes",
+          likes: 1,
+          liked: false,
+        },
+        {
+          cover: "/book2.jpg",
+          name: "House of Glass",
+          author: "Sarah Pekkanen",
+          likes: 2,
+          liked: false,
+        },
+        {
+          cover: "/book3.jpg",
+          name: "Till Death Do Us Part",
+          author: "Laure Elizabeth Flynn",
+          likes: 3,
+          liked: false,
+        },
       ],
     };
   },
@@ -185,7 +206,8 @@ h2 {
 .shelf {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
   text-align: left;
@@ -201,6 +223,7 @@ h2 {
   transition: 0.3s;
   border-radius: 0.4em;
   cursor: pointer;
+  width: min-content;
 }
 .book:hover {
   background-color: #effdff;
@@ -224,6 +247,7 @@ h2 {
   color: #0a859a;
   display: flex;
   align-items: center;
+  margin-top: .15em;
 }
 .likes img {
   width: 1em;

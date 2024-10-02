@@ -2,6 +2,7 @@
 export default {
   data() {
     return {
+      quantity: 0,
       books: [
         {
           cover: "/book1.jpg",
@@ -112,10 +113,10 @@ export default {
           <div class="labels">
             <label>
               <input
-                type="radio"
-                name="category"
-                value="fiction"
-                v-model="selectedCategory"
+              type="radio"
+              name="category"
+              value="fiction"
+              v-model="selectedCategory"
               />
               Fiction
             </label>
@@ -147,6 +148,9 @@ export default {
               Fantasy
             </label>
           </div>
+          <h3>Minimal Quantity</h3>
+          <input type="range" min="0" max="50" v-model="quantity" />
+          <p>{{ quantity }}</p>
         </div>
         <div class="shelf">
           <div class="book" v-for="book in books" :key="book.id">
@@ -235,6 +239,7 @@ export default {
   flex-direction: row;
   height: auto;
   width: 100%;
+  padding: 0 7vw;
 }
 h1 {
   font-weight: 700;
@@ -245,7 +250,7 @@ h1 {
 .shelf {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
@@ -261,8 +266,8 @@ h1 {
 }
 .filter {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   align-content: flex-start;
   flex-direction: column;
   text-align: left;
@@ -278,18 +283,65 @@ h1 {
 .labels {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   align-content: flex-start;
   flex-direction: column;
   text-align: left;
   padding: 1em;
   width: 100%;
 }
+label{
+  display: inline-flex;
+  padding: .3em 0;
+  cursor: pointer;
+  align-items: center;
+}
+
+input[type="radio"] {
+  border: 3px solid #0a859a;
+  border-radius: 50%;
+  height: 1.2em;
+  width: 1.2em;
+  margin-right: .5em;
+  appearance: none;
+  cursor: pointer;
+  transition: .1s;
+}
+
+input:checked {
+  background-color: #0a859a;
+  transition: .1s;
+}
+
+input[type="range"] {
+  margin: 1.2em 0;
+  background-color: #0a859a;
+  cursor: pointer;
+  width: 100%;
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 5px;  
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%; 
+  background: #0a859a;
+  cursor: pointer;
+}
+input[type="range"]:focus {
+  outline: none;
+}
+
 .book {
   padding: 1.5em;
   transition: 0.3s;
   border-radius: 0.4em;
   cursor: pointer;
+  width: min-content;
 }
 .book:hover {
   background-color: #effdff;
@@ -300,7 +352,7 @@ h1 {
   width: 8em;
   border-radius: 0.2em;
 }
-.h3 {
+.book h3 {
   font-size: 1em;
   font-weight: 700;
   margin: 0.2em 0 0 0;
@@ -313,9 +365,33 @@ h1 {
   color: #0a859a;
   display: flex;
   align-items: center;
+  margin-top: .15em;
 }
 .likes img {
   width: 1em;
   margin-right: 0.2em;
 }
+
+
+
+@media only screen and (max-width: 1100px) {
+  /* Switch the activated content when 
+  screen's width is lower than 1100px */
+  .container1{
+    padding-top: 8em;
+    justify-content: flex-start;
+  }
+  .container3 {
+    flex-direction: column;
+  }
+  .filter{
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1em;
+    height: auto;
+  }
+  .shelf{
+    width: 100%;
+    height: auto;}
+  }
 </style>
