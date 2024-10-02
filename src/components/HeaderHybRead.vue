@@ -45,7 +45,7 @@ function closeUnroll() {
           <li><a href="">Historical</a></li>
         </ul>
       </div>
-      <input type="text" placeholder="Research a book" class="searchbar" />
+      <input type="search" placeholder="Research a book" class="searchbar" />
       <a href="" class="button">Log in</a>
     </nav>
 
@@ -72,7 +72,7 @@ function closeUnroll() {
         <a href="">Educational</a>
         <a href="">Historical</a>
         <input
-          type="text"
+          type="search"
           placeholder="Research a book"
           class="mobile-searchbar"
         />
@@ -114,6 +114,9 @@ header {
   background-color: white;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
 }
 
 header #pc {
@@ -121,8 +124,6 @@ header #pc {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  position: fixed;
-  top: 0;
   z-index: 10;
   background-color: white;
 }
@@ -236,6 +237,15 @@ nav a,
   outline: none;
 }
 
+.searchbar::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1em;
+  width: 1em;
+  background-image: url(../assets/cross.png);
+  background-size: 1em;
+}
+
 .mobile-searchbar {
   box-sizing: border-box;
   width: 100%;
@@ -260,6 +270,15 @@ nav a,
   outline: none;
   background-color: #effdff;
   transition: 0.3s;
+}
+
+.mobile-searchbar::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1em;
+  width: 1em;
+  background-image: url(../assets/cross.png);
+  background-size: 1em;
 }
 
 /* Style of the logo */
