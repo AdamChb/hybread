@@ -418,7 +418,7 @@ header #tel img {
 
 @media only screen and (max-width: 1000px) {
   /* Switch the activated content when 
-  screen's width is lower than 1100px */
+  screen's width is lower than 1000px */
   header #pc {
     display: none;
   }

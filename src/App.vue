@@ -35,5 +35,19 @@ export default {
   font-family: inter;
   box-sizing: border-box;
   margin: 0;
+  /* scrollbar-color:  #effdff;
+  scrollbar-width: thin; */
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0a859a;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;  
+}
+
+::-webkit-scrollbar {
+  width: 16px;
 }
 </style>
