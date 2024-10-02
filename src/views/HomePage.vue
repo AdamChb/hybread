@@ -5,21 +5,21 @@ export default {
     return {
       books: [
         {
-          cover: "../assets/img/book1;jpg",
+          cover: "/book1.jpg",
           name: "The Safe Place",
           author: "Anna Downes",
           likes: 1,
           liked: false,
         },
         {
-          cover: "src/assets/book2.jpg",
+          cover: "/book2.jpg",
           name: "House of Glass",
           author: "Sarah Pekkanen",
           likes: 2,
           liked: false,
         },
         {
-          cover: "src/assets/book3.jpg",
+          cover: "/book3.jpg",
           name: "Till Death Do Us Part",
           author: "Laure Elizabeth Flynn",
           likes: 3,

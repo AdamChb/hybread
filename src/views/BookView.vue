@@ -2,7 +2,7 @@
   <div class="book-container">
     <!-- Book image -->
     <div class="book-image">
-      <img src="../assets/book_cover.png" alt="Book Cover" />
+      <img src="book_cover.png" alt="Book Cover" />
     </div>
     <!-- Book description -->
     <div class="book-info">
