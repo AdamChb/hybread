@@ -12,7 +12,6 @@
                 v-show="!book.liked"
                 @click="
                 toLike(book);
-                console.log(book);
                 "
                 src="../assets/not-liked.svg"
                 alt="like icon"
@@ -21,7 +20,6 @@
                 v-show="book.liked"
                 @click="
                 unLike(book);
-                console.log('uwu');
                 "
                 src="../assets/liked.svg"
                 alt="like icon"
