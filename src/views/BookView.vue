@@ -1,6 +1,13 @@
 <template>
   <div class="background">
   <div id="book-view">
+    <div class="bb-container">
+    <!-- TEMP - router vers la page précédente -->
+    <router-link to="/category" style="text-decoration: none;">
+        <div class="cta-button">
+          <img src="@/assets/back-arrow.svg" alt="arrow icon">
+          Return</div>
+      </router-link>
     <div class="book-container">
     <!-- Book image -->
       <div class="book-image">
@@ -41,10 +48,43 @@
     </div>
   </div>
   </div>
+  </div>
 </template>
 
 <!-- CSS -->
 <style scoped>
+.bb-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.cta-button {
+  box-sizing: border-box;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4em 1em 0.4em .7em;
+  text-align: center;
+  border-radius: 0.4em;
+  color: white;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: 0.3s;
+  animation: fadeInLeft ease 1.5s;
+  margin-bottom: 1em;
+}
+.cta-button:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
+}
+
+.cta-button img {
+  width: 20px;
+  margin-right: 10px;
+}
+
 .background {
   background-image: url("../assets/bg.jpeg");
   background-size: cover;
@@ -61,9 +101,12 @@
   height: 100%;
   display: flex;
   justify-content: center;
+  align-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.3);
+  padding: 6vw 10vw;
 }
+
 
 .book-container {
   display: flex;
@@ -71,7 +114,7 @@
   background-color: rgba(255, 255, 255, 0.9);
   padding: 2em 2.5em;
   border-radius: 10px;
-  max-width: 80%;
+  width: 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 

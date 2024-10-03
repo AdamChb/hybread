@@ -111,37 +111,46 @@ export default {
               <input
               type="radio"
               name="category"
-              value="fiction"
+              value="science-fiction"
               v-model="selectedCategory"
               />
-              Fiction
+              Science Fiction
             </label>
             <label>
               <input
                 type="radio"
                 name="category"
-                value="non-fiction"
+                value="mystery-thriller"
                 v-model="selectedCategory"
               />
-              Non-Fiction
+              Mystery & Thriller
             </label>
             <label>
               <input
                 type="radio"
                 name="category"
-                value="mystery"
+                value="childrens-books"
                 v-model="selectedCategory"
               />
-              Mystery
+              Children's Books
             </label>
             <label>
               <input
                 type="radio"
                 name="category"
-                value="fantasy"
+                value="educational"
                 v-model="selectedCategory"
               />
-              Fantasy
+              Educational
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="category"
+                value="historical"
+                v-model="selectedCategory"
+              />
+              Historical
             </label>
           </div>
           <h3>Minimal Quantity</h3>
@@ -205,7 +214,7 @@ export default {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 4vw 10vw;
+  padding: 6vw 10vw;
   height: auto;
   width: 100%;
   color: white;
@@ -236,11 +245,11 @@ h1 {
   text-align: left;
   padding: 2em;
   width: 77%;
+  height: 60vh;
   border-radius: 0.4em;
   background-color: white;
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
-  height: 60vh;
   overflow-y: scroll;
 }
 .filter {

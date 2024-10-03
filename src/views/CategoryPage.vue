@@ -38,6 +38,34 @@ export default {
           liked: false,
         },
         {
+          cover: "/book1.jpg",
+          name: "The Safe Place",
+          author: "Anna Downes",
+          likes: 1,
+          liked: false,
+        },
+        {
+          cover: "/book2.jpg",
+          name: "House of Glass",
+          author: "Sarah Pekkanen",
+          likes: 2,
+          liked: false,
+        },
+        {
+          cover: "/book3.jpg",
+          name: "Till Death Do Us Part",
+          author: "Laure Elizabeth Flynn",
+          likes: 3,
+          liked: false,
+        },
+        {
+          cover: "/book1.jpg",
+          name: "The Safe Place",
+          author: "Anna Downes",
+          likes: 1,
+          liked: false,
+        },
+        {
           cover: "/book2.jpg",
           name: "House of Glass",
           author: "Sarah Pekkanen",
@@ -61,7 +89,7 @@ export default {
   <div id="category">
     <div class="container">
       <!-- TEMP : name category -->
-      <h2>Mystery & Thriller</h2>
+      <h1>Mystery & Thriller</h1>
       <div class="shelf">
         <div v-for="book in books" :key="book.id">
           <BookCard :book="book"/>
@@ -94,17 +122,19 @@ export default {
   justify-content: center;
 }
 
-h2 {
-  margin-bottom: 1.8rem;
-  font-size: 2.5em;
+h1 {
+  font-weight: 700;
+  font-size: 3em;
+  margin-bottom: 1em;
   animation: fadeInTop ease 1.5s;
 }
 
 .container {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   text-align: center;
-  padding: 4vw 10vw;
+  padding: 6vw 10vw;
   height: auto;
   width: 100%;
   height: 100%;
@@ -115,12 +145,14 @@ h2 {
 .shelf {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
   text-align: left;
   padding: 2em;
   width: 100%;
+  height: 60vh;
   border-radius: 0.4em;
   background-color: white;
   color: black;

@@ -75,7 +75,7 @@
   margin-bottom: 1em;
   width: 100%;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 #submit {

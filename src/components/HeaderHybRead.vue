@@ -39,7 +39,7 @@ function closeUnroll() {
         <div class="categories">Categories</div>
         <ul id="dropdown">
           <li><router-link to="">Science Fiction</router-link></li>
-          <li><router-link to="">Mystery & Thriller</router-link></li>
+          <li><router-link to="/category">Mystery & Thriller</router-link></li>
           <li><router-link to="">Children's Books</router-link></li>
           <li><router-link to="">Educational</router-link></li>
           <li><router-link to="">Historical</router-link></li>

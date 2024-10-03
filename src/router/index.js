@@ -17,17 +17,17 @@ const routes = [
     component: () => import("../views/CategoryPage.vue"),
   },
   {
-    path: "/homepageLoggedin",
+    path: "/homepageloggedin",
     name: "HomepageLoggedin",
     component: () => import("../views/HomepageLoggedin.vue"),
   },
   {
-    path: "/logIn",
+    path: "/login",
     name: "LogIn",
     component: () => import("../views/LogIn.vue"),
   },
   {
-    path: "/signIn",
+    path: "/signin",
     name: "SignIn",
     component: () => import("../views/SignIn.vue"),
   },
