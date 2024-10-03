@@ -210,7 +210,3 @@ def doAll():
 
         # Insert the books in the database
         insertBook(list_book[50])
-
-
-if __name__ == "__main__":
-    doAll()
