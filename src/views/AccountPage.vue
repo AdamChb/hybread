@@ -1,39 +1,3 @@
-<template>
-  <div class="background">
-    <div class="content">
-    <!-- Left block : user account and graph -->
-      <div class="left-block">
-        <div class="your-account">
-          <h2>Your account</h2>
-          <!-- Username change -->
-          <div class="input-group">
-            <input type="text" id="username" placeholder="CurrentUsername" />
-            <button>Change username</button>
-          </div>
-          <!-- Password change -->
-          <div class="input-group">
-            <input type="password" id="password" placeholder="*************" />
-            <button>Change password</button>
-          </div>
-        </div>
-        <!-- Graph -->
-        <div class="graph">
-          <h3>graph</h3>
-        </div>
-      </div>
-      <!-- Favourites section -->
-      <div class="favourites">
-        <h2>My favourites</h2>
-        <div class="shelf">
-          <div v-for="book in books" :key="book.id">
-            <BookCard :book="book"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
 import BookCard from '@/components/BookCard.vue';
 
@@ -135,13 +99,49 @@ export default {
 };
 </script>
 
+<template>
+  <div class="background">
+    <div class="content">
+    <!-- Left block : user account and graph -->
+      <div class="left-block">
+        <div class="your-account">
+          <h2>Your account</h2>
+          <!-- Username change -->
+          <div class="input-group">
+            <input type="text" id="username" placeholder="CurrentUsername" />
+            <button>Change username</button>
+          </div>
+          <!-- Password change -->
+          <div class="input-group">
+            <input type="password" id="password" placeholder="*************" />
+            <button>Change password</button>
+          </div>
+        </div>
+        <!-- Graph -->
+        <div class="graph">
+          <h3>graph</h3>
+        </div>
+      </div>
+      <!-- Favourites section -->
+      <div class="favourites">
+        <h2>My favourites</h2>
+        <div class="shelf">
+          <div v-for="book in books" :key="book.id">
+            <BookCard :book="book"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style scoped>
 .background {
   background-image: url("../assets/bg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
+  height: 93vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -153,9 +153,9 @@ export default {
   align-items: flex-start;
   flex-direction: row;
   height: auto;
-  width: 90%;
+  width: 100%;
   padding: 2em;
-  margin-top: 5em;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .left-block {

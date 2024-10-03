@@ -194,7 +194,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   margin: 0;
-  height: 100vh;
+  height: 93vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -205,7 +205,7 @@ export default {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 4em 2em 0 2em;
+  padding: 4vw 10vw;
   height: auto;
   width: 100%;
   color: white;
@@ -213,12 +213,12 @@ export default {
 }
 .container3 {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
   height: auto;
   width: 100%;
-  padding: 0 7vw;
+  padding: 0;
 }
 h1 {
   font-weight: 700;
@@ -235,7 +235,7 @@ h1 {
   flex-wrap: wrap;
   text-align: left;
   padding: 2em;
-  width: 70%;
+  width: 77%;
   border-radius: 0.4em;
   background-color: white;
   color: black;
@@ -251,8 +251,8 @@ h1 {
   flex-direction: column;
   text-align: left;
   padding: 2em;
-  width: 20%;
-  margin-right: 1.5em;
+  width: 23%;
+  margin-right: 4em;
   border-radius: 0.4em;
   background-color: white;
   color: black;

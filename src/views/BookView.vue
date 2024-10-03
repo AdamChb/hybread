@@ -1,4 +1,5 @@
 <template>
+  <div class="background">
   <div id="book-view">
     <div class="book-container">
     <!-- Book image -->
@@ -39,26 +40,36 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <!-- CSS -->
 <style scoped>
+.background {
+  background-image: url("../assets/bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  height: 93vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 #book-view {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/bg.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .book-container {
   display: flex;
   flex-direction: row;
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
+  padding: 2em 2.5em;
   border-radius: 10px;
   max-width: 80%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
@@ -75,6 +86,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: justify;
 }
 
 .book-header h2 {

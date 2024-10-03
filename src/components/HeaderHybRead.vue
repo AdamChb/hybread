@@ -117,6 +117,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1001;
+
 }
 
 header #pc {
@@ -124,6 +125,7 @@ header #pc {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 10vh;
   z-index: 10;
   background-color: white;
 }

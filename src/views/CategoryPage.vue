@@ -72,29 +72,42 @@ export default {
 </template>
 
 <style scoped>
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    translate: 0 -300px;
+  }
+  100% {
+    opacity: 1;
+    translate: 0;
+  }
+}
 #category {
   background-image: url("../assets/bg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   margin: 0;
-  height: 100vh;
+  height: 93vh;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.8rem;
+  font-size: 2.5em;
+  animation: fadeInTop ease 1.5s;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 10vw;
+  padding: 4vw 10vw;
   height: auto;
   width: 100%;
+  height: 100%;
   color: white;
   background: rgba(0, 0, 0, 0.3);
 }
@@ -112,5 +125,6 @@ h2 {
   background-color: white;
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+  overflow-y: scroll;
 }
 </style>

@@ -1,6 +1,7 @@
 <script setup></script>
 
 <template>
+  <div class="background">
   <div id="content">
     <div id="form">
       <h1 id="title">Sign Up</h1>
@@ -39,9 +40,21 @@
       </form>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
+.background {
+  background-image: url("../assets/bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  height: 93vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 #content {
   display: flex;
   justify-content: center;
@@ -50,8 +63,7 @@
   min-height: 50vh;
   width: 100%;
   padding: 4em 0 2em 0;
-  background-image: url(@/assets/bg.jpeg);
-  background-size: cover;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 #form {
@@ -91,6 +103,7 @@
   color: white;
   font-weight: 600;
   border: none;
+  cursor: pointer;
 }
 
 #login {

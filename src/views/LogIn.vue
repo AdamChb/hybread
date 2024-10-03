@@ -1,30 +1,43 @@
 <script setup></script>
 
 <template>
-  <div id="content">
-    <div id="form">
-      <h1 id="title">Log In</h1>
-      <form>
-        <label for="email" class="subject">Username</label>
-        <input class="input" type="email" id="email" name="email" required />
-        <label for="password" class="subject">Password</label>
-        <input
-          class="input"
-          type="password"
-          id="password"
-          name="password"
-          required
-        />
-        <button type="submit" id="submit">Log In</button>
-        <p id="signup">
-          You don’t have an account ? <router-link to="/signIn">Register now</router-link>
-        </p>
-      </form>
+  <div class="background">
+    <div id="content">
+      <div id="form">
+        <h1 id="title">Log In</h1>
+        <form>
+          <label for="email" class="subject">Username</label>
+          <input class="input" type="email" id="email" name="email" required />
+          <label for="password" class="subject">Password</label>
+          <input
+            class="input"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
+          <button type="submit" id="submit">Log In</button>
+          <p id="signup">
+            You don’t have an account ? <router-link to="/signIn">Register now</router-link>
+          </p>
+        </form>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.background {
+  background-image: url("../assets/bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  height: 93vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 #content {
   display: flex;
   justify-content: center;
@@ -33,8 +46,7 @@
   min-height: 50vh;
   width: 100%;
   padding: 4em 0 2em 0;
-  background-image: url(@/assets/bg.jpeg);
-  background-size: cover;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 #form {
@@ -74,6 +86,7 @@
   color: white;
   font-weight: 600;
   border: none;
+  cursor: pointer;
 }
 
 #signup {

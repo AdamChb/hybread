@@ -144,7 +144,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   margin: 0;
-  height: 100vh;
+  height: 93vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -155,7 +155,6 @@ export default {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 4em 2em 0 2em;
   height: auto;
   width: 100%;
   color: white;
