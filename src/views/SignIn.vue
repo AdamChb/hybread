@@ -35,7 +35,7 @@
           required
         />
         <button type="submit" id="submit">Sign up</button>
-        <p id="login">You already have an account ? <a href="">Log in</a></p>
+        <p id="login">You already have an account ? <router-link to="/logIn">Log in</router-link></p>
       </form>
     </div>
   </div>

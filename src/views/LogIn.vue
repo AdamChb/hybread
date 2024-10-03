@@ -17,7 +17,7 @@
         />
         <button type="submit" id="submit">Log In</button>
         <p id="signup">
-          You don’t have an account ? <a href="">Register now</a>
+          You don’t have an account ? <router-link to="/signIn">Register now</router-link>
         </p>
       </form>
     </div>

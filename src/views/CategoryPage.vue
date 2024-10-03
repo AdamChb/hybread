@@ -1,5 +1,11 @@
 <script>
+import BookCard from '@/components/BookCard.vue'
+
 export default {
+  name: "CategoryPage",
+  components: {
+    BookCard,
+  },
   data() {
     return {
       books: [
@@ -32,7 +38,7 @@ export default {
           liked: false,
         },
         {
-          cover: "/imbook2.jpg",
+          cover: "/book2.jpg",
           name: "House of Glass",
           author: "Sarah Pekkanen",
           likes: 2,
@@ -48,50 +54,18 @@ export default {
       ],
     };
   },
-  methods: {
-    toLike(book) {
-      book.liked = !book.liked;
-      book.likes += 1;
-    },
-    unLike(book) {
-      book.liked = !book.liked;
-      book.likes -= 1;
-    },
-  },
 };
 </script>
 
 <template>
-  <div class="container">
-    <!-- TEMP : name category -->
-    <h2>Mystery & Thriller</h2>
-    <div class="shelf">
-      <div class="book" v-for="book in books" :key="book.id">
-        <img :src="book.cover" alt="book cover" />
-        <h3>{{ book.name }}</h3>
-        <p class="author">{{ book.author }}</p>
-        <div class="likes">
-          <img
-            v-show="!book.liked"
-            @click="
-              toLike(book);
-              console.log(book);
-            "
-            src="../assets/not-liked.svg"
-            alt="like icon"
-          />
-          <img
-            v-show="book.liked"
-            @click="
-              unLike(book);
-              console.log('uwu');
-            "
-            src="../assets/liked.svg"
-            alt="like icon"
-          />
-          {{ book.likes }}
+  <div id="category">
+    <div class="container">
+      <!-- TEMP : name category -->
+      <h2>Mystery & Thriller</h2>
+      <div class="shelf">
+        <div v-for="book in books" :key="book.id">
+          <BookCard :book="book"/>
         </div>
-        {{ console.log() }}
       </div>
     </div>
   </div>
@@ -122,6 +96,7 @@ h2 {
   height: auto;
   width: 100%;
   color: white;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .shelf {
@@ -137,38 +112,5 @@ h2 {
   background-color: white;
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
-}
-.book {
-  padding: 1.5em;
-  transition: 0.3s;
-  border-radius: 0.4em;
-  cursor: pointer;
-}
-.book:hover {
-  background-color: #effdff;
-  transform: scale(1.02);
-  transition: 0.3s;
-}
-.book img {
-  width: 8em;
-  border-radius: 0.2em;
-}
-.book h3 {
-  font-size: 1em;
-  font-weight: 700;
-  margin: 0.2em 0 0 0;
-}
-.book p {
-  margin: 0;
-}
-.likes {
-  font-weight: 700;
-  color: #0a859a;
-  display: flex;
-  align-items: center;
-}
-.likes img {
-  width: 1em;
-  margin-right: 0.2em;
 }
 </style>

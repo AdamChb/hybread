@@ -1,6 +1,11 @@
 <script>
+import BookCard from '@/components/BookCard.vue';
+
 export default {
   name: "HomePage",
+  components: {
+    BookCard,
+  },
   data() {
     return {
       books: [
@@ -49,18 +54,9 @@ export default {
       ],
     };
   },
-  methods: {
-    toLike(book) {
-      book.liked = !book.liked;
-      book.likes += 1;
-    },
-    unLike(book) {
-      book.liked = !book.liked;
-      book.likes -= 1;
-    },
-  },
 };
 </script>
+
 <template>
   <div class="background">
     <div class="container1">
@@ -72,35 +68,21 @@ export default {
         <br />Join us now to discover our collection and save your favorite
         books !
       </p>
-      <a href=""><div class="cta-button">Join us now</div></a>
+      <router-link to="/signIn">
+        <div class="cta-button">Join us now</div>
+      </router-link>
     </div>
   </div>
   <div class="container2">
     <h2>Most liked books</h2>
     <div class="shelf">
-      <div class="book" v-for="book in books" :key="book.id">
-        <img :src="book.cover" alt="book cover" />
-        <h3>{{ book.name }}</h3>
-        <p class="author">{{ book.author }}</p>
-        <div class="likes">
-          <img
-            v-show="!book.liked"
-            @click="toLike(book)"
-            src="../assets/not-liked.svg"
-            alt="like icon"
-          />
-          <img
-            v-show="book.liked"
-            @click="unLike(book)"
-            src="../assets/liked.svg"
-            alt="like icon"
-          />
-          {{ book.likes }}
-        </div>
+      <div v-for="book in books" :key="book.id">
+        <BookCard :book="book"/>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped>
 /* Animations */
 @keyframes fadeIn {
@@ -217,40 +199,5 @@ h2 {
   background-color: white;
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
-}
-.book {
-  padding: 1.5em;
-  transition: 0.3s;
-  border-radius: 0.4em;
-  cursor: pointer;
-  width: min-content;
-}
-.book:hover {
-  background-color: #effdff;
-  transform: scale(1.02);
-  transition: 0.3s;
-}
-.book img {
-  width: 8em;
-  border-radius: 0.2em;
-}
-.book h3 {
-  font-size: 1em;
-  font-weight: 700;
-  margin: 0.2em 0 0 0;
-}
-.book p {
-  margin: 0;
-}
-.likes {
-  font-weight: 700;
-  color: #0a859a;
-  display: flex;
-  align-items: center;
-  margin-top: .15em;
-}
-.likes img {
-  width: 1em;
-  margin-right: 0.2em;
 }
 </style>

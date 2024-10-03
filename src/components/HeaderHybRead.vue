@@ -32,29 +32,29 @@ function closeUnroll() {
   <header>
     <!-- Header for pc -->
     <nav id="pc">
-      <a href="./index.html" class="header_logo">
+      <router-link to="/" class="header_logo">
         <img src="../assets/logo_header.svg" alt="Logo Hybread" />
-      </a>
+      </router-link>
       <div @mouseenter="openUnroll" @mouseleave="closeUnroll">
         <div class="categories">Categories</div>
         <ul id="dropdown">
-          <li><a href="">Science Fiction</a></li>
-          <li><a href="">Mystery & Thriller</a></li>
-          <li><a href="">Children's Books</a></li>
-          <li><a href="">Educational</a></li>
-          <li><a href="">Historical</a></li>
+          <li><router-link to="">Science Fiction</router-link></li>
+          <li><router-link to="">Mystery & Thriller</router-link></li>
+          <li><router-link to="">Children's Books</router-link></li>
+          <li><router-link to="">Educational</router-link></li>
+          <li><router-link to="">Historical</router-link></li>
         </ul>
       </div>
       <input type="search" placeholder="Research a book" class="searchbar" />
-      <a href="" class="button">Log in</a>
+      <router-link to="/logIn" class="button">Log in</router-link>
     </nav>
 
     <!-- Header for mobile -->
     <div id="tel">
       <div id="header_tel">
-        <a href="./index.html" class="header_logo">
+        <router-link to="/" class="header_logo">
           <img src="../assets/logo_header.svg" alt="Logo Hybread" />
-        </a>
+        </router-link>
 
         <!-- Burger button -->
         <div id="menu_button" @click="toggleMenu">
@@ -66,17 +66,17 @@ function closeUnroll() {
 
       <!-- Navigation bar for mobile -->
       <nav class="header_nav_burger closethegate">
-        <a href="">Science Fiction</a>
-        <a href="">Mystery & Thriller</a>
-        <a href="">Children's Books</a>
-        <a href="">Educational</a>
-        <a href="">Historical</a>
+        <router-link to="">Science Fiction</router-link>
+        <router-link to="">Mystery & Thriller</router-link>
+        <router-link to="">Children's Books</router-link>
+        <router-link to="">Educational</router-link>
+        <router-link to="">Historical</router-link>
         <input
           type="search"
           placeholder="Research a book"
           class="mobile-searchbar"
         />
-        <a href="">Log in</a>
+        <router-link to="/logIn">Log in</router-link>
       </nav>
     </div>
   </header>
@@ -416,7 +416,7 @@ header #tel img {
   transition: 0.3s;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1400px) {
   /* Switch the activated content when 
   screen's width is lower than 1000px */
   header #pc {

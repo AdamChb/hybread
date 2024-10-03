@@ -22,6 +22,7 @@ export default {
     <router-link to="/signin">SignIn</router-link> |
     <router-link to="/login">Login</router-link> |
     <router-link to="/account">AccountPage</router-link> |
+    <router-link to="/book">Book</router-link> |
   </nav>
 </template>
 

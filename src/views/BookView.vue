@@ -1,39 +1,41 @@
 <template>
-  <div class="book-container">
+  <div id="book-view">
+    <div class="book-container">
     <!-- Book image -->
-    <div class="book-image">
-      <img src="book_cover.png" alt="Book Cover" />
-    </div>
-    <!-- Book description -->
-    <div class="book-info">
-      <div class="book-header">
-        <h2>Keleana - L'assassineuse Tome 1</h2>
-        <!-- TEMP : ajout coeur like -->
-        <div class="text">
-          <div class="author">from Sarah J Maas</div>
-          <div class="genre">Genre : Science Fiction</div>
-        </div>
+      <div class="book-image">
+        <img src="book_cover.png" alt="Book Cover" />
       </div>
-      <div class="book-details">
-        <div class="text">
-          <p>Quantity available : 3<br />ISBN : 8928663</p>
+      <!-- Book description -->
+      <div class="book-info">
+        <div class="book-header">
+          <h2>Keleana - L'assassineuse Tome 1</h2>
+          <!-- TEMP : ajout coeur like -->
+          <div class="text">
+            <div class="author">from Sarah J Maas</div>
+            <div class="genre">Genre : Science Fiction</div>
+          </div>
         </div>
-        <p class="book-description">
-          À dix-huit ans seulement, Keleana est déjà l'assassineuse la plus
-          célèbre.<br /><br />Sa réputation a pourtant attiré l’attention du
-          prince Dorian qui lui propose de reconquérir sa liberté. Pour cela,
-          elle devra participer à un tournoi contre les voleurs et les assassins
-          les plus redoutables du royaume. Le vainqueur sera sacré champion du
-          roi et entrera à son service. Les autres seront renvoyés à leur triste
-          sort.<br /><br />
+        <div class="book-details">
+          <div class="text">
+            <p>Quantity available : 3<br />ISBN : 8928663</p>
+          </div>
+          <p class="book-description">
+            À dix-huit ans seulement, Keleana est déjà l'assassineuse la plus
+            célèbre.<br /><br />Sa réputation a pourtant attiré l’attention du
+            prince Dorian qui lui propose de reconquérir sa liberté. Pour cela,
+            elle devra participer à un tournoi contre les voleurs et les assassins
+            les plus redoutables du royaume. Le vainqueur sera sacré champion du
+            roi et entrera à son service. Les autres seront renvoyés à leur triste
+            sort.<br /><br />
 
-          Pour Keleana, perdre n’est pas une option. Mais quand l’un de ses
-          adversaires est brutalement tué, puis un autre, elle comprend que
-          quelque chose de bien plus important qu’une simple compétition se joue
-          à la cour du roi.<br /><br />
+            Pour Keleana, perdre n’est pas une option. Mais quand l’un de ses
+            adversaires est brutalement tué, puis un autre, elle comprend que
+            quelque chose de bien plus important qu’une simple compétition se joue
+            à la cour du roi.<br /><br />
 
-          Trouvera-t-elle le coupable avant de devenir victime à son tour ?
-        </p>
+            Trouvera-t-elle le coupable avant de devenir victime à son tour ?
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -41,7 +43,7 @@
 
 <!-- CSS -->
 <style scoped>
-#book {
+#book-view {
   height: 100vh;
   display: flex;
   justify-content: center;
