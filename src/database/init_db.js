@@ -15,7 +15,10 @@ async function APIBookCall(keybook) {
   // API link to get the book
   const linkWork = `https://openlibrary.org${keybook}.json`;
   return await fetch(linkWork)
+    // Get the response and parse it as JSON
     .then((res) => res.json())
+
+    // Get the data from the JSON response
     .then(async (work) => {
       const returnBook = {
         key: work.key,
@@ -28,10 +31,14 @@ async function APIBookCall(keybook) {
       }
 
       const linkEditions = `https://openlibrary.org${keybook}/editions.json`;
+
+      // Get the ISBN from the editions
       return await fetch(linkEditions)
         .then((res) => res.json())
         .then((editionsResponse) => {
           const editions = editionsResponse.entries;
+
+          // Get the first ISBN found
           for (const edition of editions) {
             if (edition.isbn_13 || edition.isbn_10) {
               returnBook.isbn = edition.isbn_13
@@ -46,7 +53,10 @@ async function APIBookCall(keybook) {
 }
 
 async function APICoverCall(coverId) {
+  // API link to get the cover
   const linkCover = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+
+  // Get the cover image as a buffer
   return await fetch(linkCover).then(async (response) =>
     Buffer.from(await response.arrayBuffer())
   );
@@ -60,6 +70,8 @@ function saveCover(cover, coverId, subject) {
   }
 
   const filePath = path.join(dirPath, `${coverId}.jpg`);
+
+  // Save the cover image from the last function
   fs.writeFileSync(filePath, cover);
   return `img/${subject}/${coverId}.jpg`;
 }
@@ -73,7 +85,10 @@ async function APISubjectCall(subject, limit = 100) {
   return await fetch(linkBooks)
     .then((res) => res.json())
     .then((data) => {
+      // Get the list of books from the response
       const books = data.works || [];
+
+      // Keep only books with a cover
       return books
         .filter((book) => book.cover_id)
         .map((book) => ({
@@ -86,6 +101,7 @@ async function APISubjectCall(subject, limit = 100) {
 }
 
 function bookExists(book) {
+  // Check if the book already exists in the database
   return new Promise((resolve, reject) => {
     db.query(
       "SELECT ISBN FROM Book WHERE ISBN = ?",
@@ -105,6 +121,8 @@ function insertBooks(books) {
       [book.category],
       (err, results) => {
         if (err) throw err;
+
+        // Get the category ID
         const categoryId = results[0].Id_Category;
 
         db.query(
@@ -139,6 +157,7 @@ function insertSubjects(subjects) {
 }
 
 async function doAll() {
+  // Map the subjects from the API to the database
   const mapDb = {
     juvenile_literature: "Children's books",
     science_fiction: "Science fiction",
@@ -151,24 +170,29 @@ async function doAll() {
   insertSubjects(Object.values(mapDb));
 
   for (const [apiSubject, dbSubject] of Object.entries(mapDb)) {
+    // Get the list of books for the subject
     const listSubject = await APISubjectCall(apiSubject);
     const listBooks = [];
 
     for (const book of listSubject) {
       try {
+        // Get the book data
         const bookData = await APIBookCall(book.key);
         bookData.coverId = book.coverId;
         bookData.category = dbSubject;
         bookData.author = book.author;
 
+        // Skip books without a description
         if (!bookData.description) {
           continue;
         }
 
+        // Skip books that already exist in the database
         if (await bookExists(bookData)) {
           continue;
         }
 
+        // Limit the number of books to 50
         if (listBooks.length >= 50) break;
         listBooks.push(bookData);
       } catch (error) {
@@ -184,10 +208,10 @@ async function doAll() {
         apiSubject
       );
     }
+
+    // Insert books into the database
     insertBooks(listBooks);
   }
-
-  db.end();
 }
 
 module.exports = { doAll };
