@@ -1,4 +1,3 @@
-const { get } = require("core-js/core/dict");
 const mysql = require("mysql2");
 
 async function getBook(isbn) {
