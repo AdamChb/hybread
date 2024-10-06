@@ -1,10 +1,12 @@
 <script>
 import BookCard from '@/components/BookCard.vue';
+import ChartCategory from '@/components/ChartCategory.vue';
 
 export default {
   name: "AccountPage",
   components: {
     BookCard,
+    ChartCategory,
   },
   data() {
     return {
@@ -119,7 +121,7 @@ export default {
         </div>
         <!-- Graph -->
         <div class="graph">
-          <h3>graph</h3>
+          <ChartCategory />
         </div>
       </div>
       <!-- Favourites section -->
@@ -172,6 +174,7 @@ export default {
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   border-radius: 0.4em;
   margin-bottom: 1.5em;
+  height: 26vh;
 }
 
 .your-account h2 {
@@ -202,10 +205,22 @@ export default {
   cursor: pointer;
 }
 
+.graph {
+  background-color: white;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 0.4em;
+  margin-bottom: 1.5em;
+  height: 47vh;
+}
+
 .favourites {
   display: flex;
   flex-direction: column;
   width: 65%;
+  height: 76.5vh;
   background-color: white;
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
@@ -235,6 +250,31 @@ export default {
   color: black;
   height: 60vh;
   overflow-y: scroll;
+}
+
+@media only screen and (max-width: 1200px) {
+  .background {
+    height: 176vh;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    height: 176vh;
+  }
+
+  .left-block {
+    margin-top: 5em;
+    width: 100%;
+  }
+
+  .input-group {
+    justify-content: center;
+  }
+
+  .favourites {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
