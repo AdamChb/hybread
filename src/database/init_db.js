@@ -4,12 +4,7 @@ const mysql = require("mysql2");
 const path = require("path");
 
 // Database connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "hybread_root",
-  password: "efreihybread240",
-  database: "hybread",
-});
+const db = require("./start_db").db;
 
 async function APIBookCall(keybook) {
   // API link to get the book

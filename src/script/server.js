@@ -2,7 +2,8 @@
 // You can import local files by using the relative path
 
 const express = require("express");
-const api_db = require("../database/api_db");
+const api_book = require("../database/api_book");
+const db = require("../database/start_db");
 const init_db = require("../database/init_db");
 
 // Configuration about the server
@@ -15,7 +16,7 @@ const server = express();
 // When a GET requets is made at the adress /getBook, the server respond (res) with the return of the function getBook
 
 server.get("/getMostLiked", async (req, res) => {
-  res.send(await api_db.getMostLiked(10));
+  res.send(await api_book.getMostLiked(10));
 });
 
 // The same method exist with POST, PUT and DELETE
