@@ -26,7 +26,6 @@ CREATE TABLE Book(
    Name_Book VARCHAR(200) NOT NULL,
    Author VARCHAR(50) NOT NULL,
    Summary VARCHAR(8000) NOT NULL,
-   Likes INT DEFAULT 0,
    Cover_Book VARCHAR(50),
    ID_Category INT NOT NULL,
    FOREIGN KEY(ID_Category) REFERENCES Category(ID_Category)

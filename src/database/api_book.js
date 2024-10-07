@@ -10,18 +10,6 @@ async function getBook(isbn) {
   });
 }
 
-async function getMostLiked(limit) {
-  return new Promise((resolve, reject) => {
-    db.query(
-      `SELECT * FROM Book ORDER BY Likes DESC LIMIT ${limit}`,
-      (err, results) => {
-        if (err) return reject(err);
-        return resolve(results);
-      }
-    );
-  });
-}
-
 async function insertBook(book) {
   return new Promise((resolve, reject) => {
     db.query(
@@ -64,18 +52,6 @@ async function updateIsbnBook(id, isbn) {
       if (err) return reject(err);
       return resolve();
     });
-  });
-}
-
-async function updateLikesBook(id, likes) {
-  return new Promise((resolve, reject) => {
-    db.query(
-      `UPDATE Book SET Likes = ${likes} WHERE Id_Book = ${id}`,
-      (err) => {
-        if (err) return reject(err);
-        return resolve();
-      }
-    );
   });
 }
 
@@ -139,11 +115,9 @@ async function deleteBook(id) {
 // Export the function getBook
 module.exports = {
   getBook,
-  getMostLiked,
   insertBook,
   updateNameBook,
   updateIsbnBook,
-  updateLikesBook,
   updateCoverBook,
   updateSummaryBook,
   updateAuthorBook,
