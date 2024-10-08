@@ -173,5 +173,6 @@ h1 {
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   overflow-y: scroll;
+  animation: fadeInBottom ease 1s;
 }
 </style>

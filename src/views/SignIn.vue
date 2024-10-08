@@ -58,7 +58,7 @@
 
           <!-- Link to the log in page if the user already has an account -->
           <p id="login">
-            You already have an account ?
+            You already have an account?
             <router-link to="/logIn">Log in</router-link>
           </p>
         </form>
@@ -119,6 +119,11 @@
   width: 100%;
   border-radius: 5px;
   border: 2px solid black;
+  transition: .3s;
+}
+input:hover, input:focus {
+transform: scale(1.03);
+transition: .3s;
 }
 
 

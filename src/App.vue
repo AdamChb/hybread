@@ -77,6 +77,26 @@ export default {
     translate: 0;
   }
 }
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    translate: 300px 0;
+  }
+  100% {
+    opacity: 1;
+    translate: 0;
+  }
+}
+@keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    translate: 0 300px;
+  }
+  100% {
+    opacity: 1;
+    translate: 0;
+  }
+}
 @keyframes fadeOut {
   0% {
     opacity: 1;

@@ -38,10 +38,10 @@
             required
           />
           <!-- Button to sumit the form -->
-          <button type="submit" id="submit" class="button">Log In</button>
+          <button type="submit" id="submit" class="button">Log in</button>
           <!-- Link the the sign up page if the user doesn't have an account -->
           <p id="signup">
-            You don’t have an account ?
+            You don't have an account yet?
             <router-link to="/signIn">Register now</router-link>
           </p>
         </form>
@@ -103,6 +103,11 @@
   width: 100%;
   border-radius: 5px;
   border: 2px solid black;
+  transition: .3s;
+}
+input:hover, input:focus {
+transform: scale(1.04);
+transition: .3s;
 }
 
 .button {
@@ -122,7 +127,7 @@
 }
 
 .button:hover {
-  transform: scale(1.04);
+  transform: scale(1.03);
   transition: 0.3s;
 }
 

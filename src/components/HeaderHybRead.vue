@@ -215,6 +215,7 @@ nav a,
   border-radius: 7px;
   padding: 1em;
   transition: 0.3s;
+  font-size: 1em;
 }
 
 .searchbar:hover {
@@ -405,9 +406,9 @@ header #tel img {
   transition: 0.3s;
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1050px) {
   /* Switch the activated content when 
-  screen's width is lower than 1000px */
+  screen's width is lower than 1050px */
   header #pc {
     display: none;
   }
