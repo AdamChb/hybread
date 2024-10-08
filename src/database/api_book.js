@@ -136,6 +136,16 @@ async function deleteBook(id) {
   });
 }
 
+async function getCover(coverId) {
+  // API link to get the cover
+  const linkCover = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+
+  // Get the cover image as a buffer
+  return await fetch(linkCover).then(async (response) =>
+    Buffer.from(await response.arrayBuffer())
+  );
+}
+
 // Export the function getBook
 module.exports = {
   getBook,
@@ -149,4 +159,5 @@ module.exports = {
   updateAuthorBook,
   updateCategoryBook,
   deleteBook,
+  getCover,
 };

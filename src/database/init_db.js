@@ -47,30 +47,6 @@ async function APIBookCall(keybook) {
     });
 }
 
-async function APICoverCall(coverId) {
-  // API link to get the cover
-  const linkCover = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
-
-  // Get the cover image as a buffer
-  return await fetch(linkCover).then(async (response) =>
-    Buffer.from(await response.arrayBuffer())
-  );
-}
-
-function saveCover(cover, coverId, subject) {
-  // Create directories if they don't exist
-  const dirPath = path.join(__dirname, "img", subject);
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
-
-  const filePath = path.join(dirPath, `${coverId}.jpg`);
-
-  // Save the cover image from the last function
-  fs.writeFileSync(filePath, cover);
-  return `img/${subject}/${coverId}.jpg`;
-}
-
 async function APISubjectCall(subject, limit = 100) {
   if (subject === "textbooks") {
     limit = 300;
@@ -193,15 +169,6 @@ async function doAll() {
       } catch (error) {
         console.error(error);
       }
-    }
-
-    // Get covers and insert books into the database
-    for (const book of listBooks) {
-      book.cover = saveCover(
-        await APICoverCall(book.coverId),
-        book.coverId,
-        apiSubject
-      );
     }
 
     // Insert books into the database
