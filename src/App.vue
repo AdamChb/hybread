@@ -47,4 +47,50 @@ export default {
 ::-webkit-scrollbar {
   width: 16px;
 }
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    translate: 0 -300px;
+  }
+  100% {
+    opacity: 1;
+    translate: 0;
+  }
+}
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    translate: -300px 0;
+  }
+  100% {
+    opacity: 1;
+    translate: 0;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes slideTop {
+  0% {
+    translate: 0 -100px;
+  }
+  100% {
+    translate: 0;
+  }
+}
 </style>

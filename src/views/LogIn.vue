@@ -25,6 +25,7 @@
             type="text"
             id="username"
             name="username"
+            placeholder="ex : pineapplelover"
             required
           />
           <label for="password" class="subject">Password</label>
@@ -33,10 +34,11 @@
             type="password"
             id="password"
             name="password"
+            placeholder="ex : PiNeApPlE4l!fe"
             required
           />
           <!-- Button to sumit the form -->
-          <button type="submit" id="submit">Log In</button>
+          <button type="submit" id="submit" class="button">Log In</button>
           <!-- Link the the sign up page if the user doesn't have an account -->
           <p id="signup">
             You don’t have an account ?
@@ -70,6 +72,7 @@
   width: 100%;
   padding: 4em 0 2em 0;
   background: rgba(0, 0, 0, 0.3);
+
 }
 
 #form {
@@ -80,6 +83,7 @@
   min-height: 40vh;
   background-color: #ffffff;
   border-radius: 25px;
+  animation: fadeInTop ease 1s;
 }
 #title {
   font-size: 1.5em;
@@ -101,15 +105,25 @@
   border: 2px solid black;
 }
 
-#submit {
-  padding: 0.5em;
-  width: 17%;
-  border-radius: 15px;
+.button {
+  box-sizing: border-box;
+  font-weight: 400;
   background-color: #0a859a;
+  display: inline-block;
+  padding: 0.5em 1em;
+  width: 100%;
+  text-align: center;
+  border-radius: 0.4em;
   color: white;
-  font-weight: 600;
+  transition: 0.3s;
   border: none;
   cursor: pointer;
+  font-size: 1em;
+}
+
+.button:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
 }
 
 #signup {

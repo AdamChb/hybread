@@ -80,7 +80,7 @@ function closeUnroll() {
       <!-- Navigation bar for mobile -->
       <nav class="header_nav_burger closethegate">
         <router-link to="">Science Fiction</router-link>
-        <router-link to="">Mystery & Thriller</router-link>
+        <router-link to="/category">Mystery & Thriller</router-link>
         <router-link to="">Children's Books</router-link>
         <router-link to="">Educational</router-link>
         <router-link to="">Historical</router-link>
@@ -95,34 +95,8 @@ function closeUnroll() {
   </header>
 </template>
 
-<!-- Style of the header -->
-<style scoped>
-/* Animations */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes slideTop {
-  0% {
-    translate: 0 -100px;
-  }
-  100% {
-    translate: 0;
-  }
-}
 
+<style scoped>
 /* Styles of the header */
 header {
   background-color: white;

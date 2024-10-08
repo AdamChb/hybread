@@ -25,11 +25,12 @@
             type="text"
             id="username"
             name="username"
+            placeholder="ex : pineapplelover"
             required
           />
 
           <label class="subject" for="email">Email</label>
-          <input class="input" type="email" id="email" name="email" required />
+          <input class="input" type="email" id="email" name="email" placeholder="ex : pineapple.lover@hybread.com" required />
 
           <label class="subject" for="password">Password</label>
           <input
@@ -37,21 +38,23 @@
             type="password"
             id="password"
             name="password"
+            placeholder="ex : PiNeApPlE4l!fe"
             required
           />
 
           <!-- The password is asked twice for verification -->
-          <label class="subject" for="repeat-password">Repeat Password</label>
+          <label class="subject" for="repeat-password">Confirm Password</label>
           <input
             class="input"
             type="password"
             id="repeat-password"
             name="repeat-password"
+            placeholder="ex : PiNeApPlE4l!fe (again)" 
             required
           />
 
           <!-- Button to submit the register form -->
-          <button type="submit" id="submit">Sign up</button>
+          <button type="submit" id="submit" class="button">Sign up</button>
 
           <!-- Link to the log in page if the user already has an account -->
           <p id="login">
@@ -96,6 +99,7 @@
   min-height: 40vh;
   background-color: #ffffff;
   border-radius: 25px;
+  animation: fadeInTop ease 1s;
 }
 #title {
   font-size: 1.5em;
@@ -117,15 +121,26 @@
   border: 2px solid black;
 }
 
-#submit {
-  padding: 0.5em;
-  width: 17%;
-  border-radius: 15px;
+
+.button {
+  box-sizing: border-box;
+  font-weight: 400;
   background-color: #0a859a;
+  display: inline-block;
+  padding: 0.5em 1em;
+  width: 100%;
+  text-align: center;
+  border-radius: 0.4em;
   color: white;
-  font-weight: 600;
+  transition: 0.3s;
   border: none;
   cursor: pointer;
+  font-size: 1em;
+}
+
+.button:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
 }
 
 #login {
