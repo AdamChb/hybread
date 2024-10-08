@@ -2,8 +2,11 @@
 // You can import local files by using the relative path
 
 const express = require("express");
+const api_reader = require("../database/api_reader");
 const api_book = require("../database/api_book");
-const db = require("../database/start_db");
+const api_category = require("../database/api_category");
+const api_favourite = require("../database/api_favourite");
+
 const init_db = require("../database/init_db");
 
 // Configuration about the server

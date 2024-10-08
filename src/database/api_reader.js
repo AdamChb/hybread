@@ -70,3 +70,5 @@ async function updatePassword(id, password) {
     });
   });
 }
+
+module.exports = { insertUser, getUser, updatePseudo, updatePassword };

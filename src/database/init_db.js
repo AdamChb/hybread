@@ -4,7 +4,12 @@ const mysql = require("mysql2");
 const path = require("path");
 
 // Database connection
-const db = require("./start_db").db;
+const db = mysql.createConnection({
+  host: "concordia-db.docsystem.xyz",
+  user: "uml-b-3",
+  password: "FSZFcNnSUwexhzXqfwO7oxHbJmYQteF9",
+  database: "web-b-3",
+});
 
 async function APIBookCall(keybook) {
   // API link to get the book
@@ -162,7 +167,7 @@ async function doAll() {
   };
 
   // Insert subjects into the database
-  insertSubjects(Object.values(mapDb));
+  //insertSubjects(Object.values(mapDb));
 
   for (const [apiSubject, dbSubject] of Object.entries(mapDb)) {
     // Get the list of books for the subject

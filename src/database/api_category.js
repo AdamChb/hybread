@@ -25,3 +25,5 @@ async function updateCategory(id, name) {
     );
   });
 }
+
+module.exports = { insertCategory, updateCategory };
