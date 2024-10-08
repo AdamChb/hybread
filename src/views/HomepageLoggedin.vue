@@ -1,3 +1,14 @@
+<!-- ------------------------------
+  Hybread - HomepageLoggedin.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This view is the page where the user arrives when he logs in
+------------------------------ -->
+
 <script>
 import BookCard from "@/components/BookCard.vue";
 
@@ -6,6 +17,7 @@ export default {
   components: {
     BookCard,
   },
+  // TEMP : data from db
   data() {
     return {
       quantity: 0,
@@ -99,20 +111,23 @@ export default {
   },
 };
 </script>
+
 <template>
   <div class="background">
     <div class="container1">
       <h1>Search your next read.</h1>
       <div class="container3">
+        <!-- The user can filter the research by category or quantity -->
         <div class="filter">
+          <!-- Filter by category -->
           <h3>Category</h3>
           <div class="labels">
             <label>
               <input
-              type="radio"
-              name="category"
-              value="science-fiction"
-              v-model="selectedCategory"
+                type="radio"
+                name="category"
+                value="science-fiction"
+                v-model="selectedCategory"
               />
               Science Fiction
             </label>
@@ -153,19 +168,24 @@ export default {
               Historical
             </label>
           </div>
+          <!-- Filter by quantity/stock -->
           <h3>Minimal Quantity</h3>
           <input type="range" min="0" max="50" v-model="quantity" />
           <p>{{ quantity }}</p>
         </div>
+
+        <!-- Display the books -->
         <div class="shelf">
           <div v-for="book in books" :key="book.id">
-            <BookCard :book="book"/>
+            <BookCard :book="book" />
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<!-- Style of the page -->
 <style scoped>
 /* Animations */
 @keyframes fadeIn {
@@ -278,9 +298,9 @@ h1 {
   padding: 1em;
   width: 100%;
 }
-label{
+label {
   display: inline-flex;
-  padding: .3em 0;
+  padding: 0.3em 0;
   cursor: pointer;
   align-items: center;
 }
@@ -290,15 +310,15 @@ input[type="radio"] {
   border-radius: 50%;
   height: 1.2em;
   width: 1.2em;
-  margin-right: .5em;
+  margin-right: 0.5em;
   appearance: none;
   cursor: pointer;
-  transition: .1s;
+  transition: 0.1s;
 }
 
 input:checked {
   background-color: #0a859a;
-  transition: .1s;
+  transition: 0.1s;
 }
 
 input[type="range"] {
@@ -308,7 +328,7 @@ input[type="range"] {
   width: 100%;
   appearance: none;
   height: 8px;
-  border-radius: 5px;  
+  border-radius: 5px;
   outline: none;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -316,7 +336,7 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 17px;
   height: 17px;
-  border-radius: 50%; 
+  border-radius: 50%;
   background: #0a859a;
   cursor: pointer;
 }
@@ -324,25 +344,26 @@ input[type="range"]:focus {
   outline: none;
 }
 
-
+/* Responsive */
 @media only screen and (max-width: 1100px) {
   /* Switch the activated content when 
   screen's width is lower than 1100px */
-  .container1{
+  .container1 {
     padding-top: 8em;
     justify-content: flex-start;
   }
   .container3 {
     flex-direction: column;
   }
-  .filter{
+  .filter {
     width: 100%;
     margin-right: 0;
     margin-bottom: 1em;
     height: auto;
   }
-  .shelf{
+  .shelf {
     width: 100%;
-    height: auto;}
+    height: auto;
   }
+}
 </style>
