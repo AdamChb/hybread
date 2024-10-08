@@ -1,48 +1,70 @@
+<!-- ------------------------------
+  Hybread - SignIn.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This view is the page where the user can sign in
+------------------------------ -->
+
+<!-- TEMP : js for sign in -->
 <script setup></script>
 
 <template>
   <div class="background">
-  <div id="content">
-    <div id="form">
-      <h1 id="title">Sign Up</h1>
-      <form>
-        <label class="subject" for="username">Username</label>
-        <input
-          class="input"
-          type="text"
-          id="username"
-          name="username"
-          required
-        />
+    <div id="content">
+      <!-- Form to register -->
+      <div id="form">
+        <h1 id="title">Sign Up</h1>
+        <form>
+          <label class="subject" for="username">Username</label>
+          <input
+            class="input"
+            type="text"
+            id="username"
+            name="username"
+            required
+          />
 
-        <label class="subject" for="email">Email</label>
-        <input class="input" type="email" id="email" name="email" required />
+          <label class="subject" for="email">Email</label>
+          <input class="input" type="email" id="email" name="email" required />
 
-        <label class="subject" for="password">Password</label>
-        <input
-          class="input"
-          type="password"
-          id="password"
-          name="password"
-          required
-        />
+          <label class="subject" for="password">Password</label>
+          <input
+            class="input"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
 
-        <label class="subject" for="repeat-password">Repeat Password</label>
-        <input
-          class="input"
-          type="password"
-          id="repeat-password"
-          name="repeat-password"
-          required
-        />
-        <button type="submit" id="submit">Sign up</button>
-        <p id="login">You already have an account ? <router-link to="/logIn">Log in</router-link></p>
-      </form>
+          <!-- The password is asked twice for verification -->
+          <label class="subject" for="repeat-password">Repeat Password</label>
+          <input
+            class="input"
+            type="password"
+            id="repeat-password"
+            name="repeat-password"
+            required
+          />
+
+          <!-- Button to submit the register form -->
+          <button type="submit" id="submit">Sign up</button>
+
+          <!-- Link to the log in page if the user already has an account -->
+          <p id="login">
+            You already have an account ?
+            <router-link to="/logIn">Log in</router-link>
+          </p>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
+<!-- Style of the page -->
 <style scoped>
 .background {
   background-image: url("../assets/bg.jpeg");
@@ -116,6 +138,7 @@
   text-decoration: none;
 }
 
+/* Responsive */
 @media (max-width: 1000px) {
   #form {
     width: 50vw;

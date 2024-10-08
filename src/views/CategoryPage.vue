@@ -1,11 +1,23 @@
+<!-- ------------------------------
+  Hybread - CategoryPage.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This view is the page where the user can see all the books from one category
+------------------------------ -->
+
 <script>
-import BookCard from '@/components/BookCard.vue'
+import BookCard from "@/components/BookCard.vue";
 
 export default {
   name: "CategoryPage",
   components: {
     BookCard,
   },
+  // TEMP : data from db
   data() {
     return {
       books: [
@@ -90,15 +102,17 @@ export default {
     <div class="container">
       <!-- TEMP : name category -->
       <h1>Mystery & Thriller</h1>
+      <!-- Books display -->
       <div class="shelf">
         <div v-for="book in books" :key="book.id">
-          <BookCard :book="book"/>
+          <BookCard :book="book" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
+<!-- Style of the page -->
 <style scoped>
 @keyframes fadeInTop {
   0% {
@@ -110,6 +124,7 @@ export default {
     translate: 0;
   }
 }
+
 #category {
   background-image: url("../assets/bg.jpeg");
   background-size: cover;

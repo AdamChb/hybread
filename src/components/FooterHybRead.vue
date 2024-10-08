@@ -1,3 +1,14 @@
+<!-- ------------------------------
+  Hybread - FooterHubRead.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This component is the footer.
+------------------------------ -->
+
 <template>
   <footer>
     <img src="@/assets/logo_header.svg" />
@@ -5,6 +16,7 @@
   </footer>
 </template>
 
+<!-- Style of the footer -->
 <style scoped>
 footer {
   background-color: white;

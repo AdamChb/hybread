@@ -1,11 +1,23 @@
+<!-- ------------------------------
+  Hybread - HomePage.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This view is the homepage - the first page where the user arrives
+------------------------------ -->
+
 <script>
-import BookCard from '@/components/BookCard.vue';
+import BookCard from "@/components/BookCard.vue";
 
 export default {
   name: "HomePage",
   components: {
     BookCard,
   },
+  //TEMP : get book from database
   data() {
     return {
       books: [
@@ -59,6 +71,7 @@ export default {
 
 <template>
   <div class="background">
+    <!-- First container : Presentation & join us now button -->
     <div class="container1">
       <h1>You love books ?</h1>
       <h1>You will love HybRead.</h1>
@@ -68,21 +81,26 @@ export default {
         <br />Join us now to discover our collection and save your favorite
         books !
       </p>
+      <!-- Button join us now -->
       <router-link to="/signIn">
         <div class="cta-button">Join us now</div>
       </router-link>
     </div>
   </div>
+
+  <!-- Second container : Most liked books -->
   <div class="container2">
     <h2>Most liked books</h2>
     <div class="shelf">
       <div v-for="book in books" :key="book.id">
-        <BookCard :book="book"/>
+        <!-- Book card in component -->
+        <BookCard :book="book" />
       </div>
     </div>
   </div>
 </template>
 
+<!-- Style of the page -->
 <style scoped>
 /* Animations */
 @keyframes fadeIn {

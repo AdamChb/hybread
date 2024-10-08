@@ -1,3 +1,15 @@
+<!-- ------------------------------
+  Hybread - LogIn.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This view is the hpage where the user can log in
+------------------------------ -->
+
+<!-- TEMP : js connexion -->
 <script setup></script>
 
 <template>
@@ -5,9 +17,16 @@
     <div id="content">
       <div id="form">
         <h1 id="title">Log In</h1>
+        <!-- Form to get the username and password to log in -->
         <form>
-          <label for="email" class="subject">Username</label>
-          <input class="input" type="email" id="email" name="email" required />
+          <label for="username" class="subject">Username</label>
+          <input
+            class="input"
+            type="text"
+            id="username"
+            name="username"
+            required
+          />
           <label for="password" class="subject">Password</label>
           <input
             class="input"
@@ -16,9 +35,12 @@
             name="password"
             required
           />
+          <!-- Button to sumit the form -->
           <button type="submit" id="submit">Log In</button>
+          <!-- Link the the sign up page if the user doesn't have an account -->
           <p id="signup">
-            You don’t have an account ? <router-link to="/signIn">Register now</router-link>
+            You don’t have an account ?
+            <router-link to="/signIn">Register now</router-link>
           </p>
         </form>
       </div>
@@ -26,6 +48,7 @@
   </div>
 </template>
 
+<!-- Style of the page -->
 <style scoped>
 .background {
   background-image: url("../assets/bg.jpeg");

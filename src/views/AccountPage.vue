@@ -1,6 +1,17 @@
+<!-- ------------------------------
+  Hybread - AccountPage.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This view is the page where the user can see his account information
+------------------------------ -->
+
 <script>
-import BookCard from '@/components/BookCard.vue';
-import ChartCategory from '@/components/ChartCategory.vue';
+import BookCard from "@/components/BookCard.vue";
+import ChartCategory from "@/components/ChartCategory.vue";
 
 export default {
   name: "AccountPage",
@@ -8,6 +19,7 @@ export default {
     BookCard,
     ChartCategory,
   },
+  // TEMP : get data from bd
   data() {
     return {
       books: [
@@ -96,7 +108,7 @@ export default {
           liked: false,
         },
       ],
-    }
+    };
   },
 };
 </script>
@@ -104,7 +116,7 @@ export default {
 <template>
   <div class="background">
     <div class="content">
-    <!-- Left block : user account and graph -->
+      <!-- Left block : user account and graph -->
       <div class="left-block">
         <div class="your-account">
           <h2>Your account</h2>
@@ -129,7 +141,7 @@ export default {
         <h2>My favourites</h2>
         <div class="shelf">
           <div v-for="book in books" :key="book.id">
-            <BookCard :book="book"/>
+            <BookCard :book="book" />
           </div>
         </div>
       </div>
@@ -137,6 +149,7 @@ export default {
   </div>
 </template>
 
+<!-- Style of the page -->
 <style scoped>
 .background {
   background-image: url("../assets/bg.jpeg");
@@ -198,7 +211,7 @@ export default {
 
 .input-group button {
   padding: 0.5em 1em;
-  background-color: #0A859A;
+  background-color: #0a859a;
   color: white;
   border: none;
   border-radius: 0.4em;
@@ -225,7 +238,7 @@ export default {
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   border-radius: 0.4em;
-  padding: 1.5em 0!important;
+  padding: 1.5em 0 !important;
   padding-right: 0;
 }
 
@@ -278,7 +291,8 @@ export default {
 }
 
 @media (max-width: 480px) {
-  .input-group input, .input-group button {
+  .input-group input,
+  .input-group button {
     font-size: 0.8em;
   }
 
@@ -286,5 +300,4 @@ export default {
     font-size: 1.2em;
   }
 }
-
 </style>

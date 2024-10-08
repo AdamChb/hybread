@@ -1,54 +1,66 @@
-<template>
-    <div class="book">
-        <router-link to="/book" :book="book">
-            <div class="img">
-                <img :src="book.cover" alt="book cover"/>
-            </div>
-            <h3>{{ book.name }}</h3>
-            <p class="author">{{ book.author }}</p>
-        </router-link>
-            <div class="likes">
-            <img
-                v-show="!book.liked"
-                @click="
-                toLike(book);
-                "
-                src="../assets/not-liked.svg"
-                alt="like icon"
-            />
-            <img
-                v-show="book.liked"
-                @click="
-                unLike(book);
-                "
-                src="../assets/liked.svg"
-                alt="like icon"
-            />
-            {{ book.likes }}
-        </div>
-        {{ console.log() }}
-    </div>
-</template>
+<!-- ------------------------------
+  Hybread - BookCard.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This component is the book card.
+------------------------------ -->
+
+<!-- TEMP : les images fonctionnent po -->
 
 <script>
 export default {
-    name: "BookCard",
-    props: {
-        book: Object,
+  name: "BookCard",
+  props: {
+    book: Object,
+  },
+  methods: {
+    toLike(book) {
+      book.liked = !book.liked;
+      book.likes += 1;
     },
-    methods: {
-        toLike(book) {
-            book.liked = !book.liked;
-            book.likes += 1;
-        },
-        unLike(book) {
-            book.liked = !book.liked;
-            book.likes -= 1;
-        },
+    unLike(book) {
+      book.liked = !book.liked;
+      book.likes -= 1;
     },
-}
+  },
+};
 </script>
 
+<template>
+  <div class="book">
+    <router-link to="/book" :book="book">
+      <div class="img">
+        <img :src="book.cover" alt="book cover" />
+      </div>
+      <h3>{{ book.name }}</h3>
+      <p class="author">{{ book.author }}</p>
+    </router-link>
+
+    <!-- Display the number of likes of a book -->
+    <div class="likes">
+      <img
+        v-show="!book.liked"
+        @click="toLike(book)"
+        src="../assets/not-liked.svg"
+        alt="like icon"
+      />
+      <img
+        v-show="book.liked"
+        @click="unLike(book)"
+        src="../assets/liked.svg"
+        alt="like icon"
+      />
+      {{ book.likes }}
+    </div>
+    {{ console.log() }}
+  </div>
+</template>
+
+<!-- Style of the page -->
 <style scoped>
 .book {
   padding: 1.5em;
@@ -65,15 +77,15 @@ export default {
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .img {
-    width: 100%;
-    height: 12.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 12.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .book img {

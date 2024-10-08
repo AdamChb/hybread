@@ -1,3 +1,14 @@
+<!-- ------------------------------
+  Hybread - HeaderHybRead.vue
+
+  Mathias BENOIT
+  Adam CHABA
+  Eva MAROT
+  Sacha PORTAL
+
+  This component is the header.
+------------------------------ -->
+
 <script setup>
 import { ref } from "vue";
 let i = ref(0);
@@ -45,6 +56,8 @@ function closeUnroll() {
           <li><router-link to="">Historical</router-link></li>
         </ul>
       </div>
+
+      <!-- Research bar to search a book -->
       <input type="search" placeholder="Research a book" class="searchbar" />
       <router-link to="/logIn" class="button">Log in</router-link>
     </nav>
@@ -82,6 +95,7 @@ function closeUnroll() {
   </header>
 </template>
 
+<!-- Style of the header -->
 <style scoped>
 /* Animations */
 @keyframes fadeIn {
@@ -117,7 +131,6 @@ header {
   position: sticky;
   top: 0;
   z-index: 1001;
-
 }
 
 header #pc {
