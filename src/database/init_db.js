@@ -97,13 +97,14 @@ function insertBooks(books) {
         const categoryId = results[0].Id_Category;
 
         db.query(
-          "INSERT INTO Book (Name_Book, Author, Summary, ISBN, Cover_Book, Id_Category) VALUES (?, ?, ?, ?, ?, ?)",
+          "INSERT INTO Book (Name_Book, Author, Summary, ISBN, Cover_Book, Id_Category) VALUES (?, ?, ?, ?, BINARY(?), ?)",
           [
             book.title,
             book.author,
             book.description,
             book.isbn,
-            book.cover,
+            // Open the file of the cover and get a buffer
+            new Buffer.from(fs.readFileSync(book.cover)),
             categoryId,
           ],
           (err) => {
@@ -127,6 +128,30 @@ function insertSubjects(subjects) {
   });
 }
 
+async function APICoverCall(coverId) {
+  // API link to get the cover
+  const linkCover = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+
+  // Get the cover image as a buffer
+  return await fetch(linkCover).then(async (response) =>
+    Buffer.from(await response.arrayBuffer())
+  );
+}
+
+function saveCover(cover, coverId, subject) {
+  // Create directories if they don't exist
+  const dirPath = path.join(__dirname, "img", subject);
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+
+  const filePath = path.join(dirPath, `${coverId}.jpg`);
+
+  // Save the cover image from the last function
+  fs.writeFileSync(filePath, cover);
+  return `src/database/img/${subject}/${coverId}.jpg`;
+}
+
 async function doAll() {
   // Map the subjects from the API to the database
   const mapDb = {
@@ -138,7 +163,7 @@ async function doAll() {
   };
 
   // Insert subjects into the database
-  insertSubjects(Object.values(mapDb));
+  //insertSubjects(Object.values(mapDb));
 
   for (const [apiSubject, dbSubject] of Object.entries(mapDb)) {
     // Get the list of books for the subject
@@ -169,6 +194,15 @@ async function doAll() {
       } catch (error) {
         console.error(error);
       }
+    }
+
+    // Save the cover of each book
+    for (const book of listBooks) {
+      book.cover = saveCover(
+        await APICoverCall(book.coverId),
+        book.coverId,
+        apiSubject
+      );
     }
 
     // Insert books into the database

@@ -1,3 +1,5 @@
+const db = require("./start_db").db;
+
 async function insertCategory(name) {
   return new Promise((resolve, reject) => {
     db.query(`INSERT INTO Category (Name) VALUES ('${name}')`, (err) => {
@@ -25,3 +27,5 @@ async function updateCategory(id, name) {
     );
   });
 }
+
+module.exports = { insertCategory, updateCategory };

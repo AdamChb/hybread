@@ -1,3 +1,6 @@
+const db = require("./start_db").db;
+const bcrypt = require("bcrypt");
+
 async function insertUser(pseudo, email, password, admin = false) {
   return new Promise((resolve, reject) => {
     db.query(

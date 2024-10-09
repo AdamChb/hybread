@@ -2,10 +2,10 @@ mysql = require("mysql2");
 
 // Database connection
 var db = mysql.createConnection({
-  host: "localhost",
-  user: "hybread_root",
-  password: "efreihybread240",
-  database: "hybread",
+  host: "concordia-db.docsystem.xyz",
+  user: "uml-b-3",
+  password: "FSZFcNnSUwexhzXqfwO7oxHbJmYQteF9",
+  database: "web-b-3",
 });
 
 module.exports = { db };
