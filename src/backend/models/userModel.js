@@ -1,11 +1,5 @@
 const mysql = require("mysql2");
-
-const serv = { 
-    host: "concordia-db.docsystem.xyz",
-    user: "uml-b-3",
-    password: "FSZFcNnSUwexhzXqfwO7oxHbJmYQteF9",
-    database: "web-b-3",
-};
+const serv = require("../serverLogs");
 
 // Find User by Email
 const findUserByEmail = (email, callback) => {
