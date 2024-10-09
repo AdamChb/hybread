@@ -39,11 +39,20 @@ function closeUnroll() {
 }
 </script>
 
+<script>
+export default {
+  props: {
+    isLoggedIn: Boolean,
+    isAdmin: Boolean,
+  }
+}
+</script>
+
 <template>
   <header>
     <!-- Header for pc -->
     <nav id="pc">
-      <router-link to="/" class="header_logo">
+      <router-link :to="isLoggedIn ? '/homepageloggedin' : '/'" class="header_logo">
         <img src="../assets/logo_header.svg" alt="Logo Hybread" />
       </router-link>
       <div @mouseenter="openUnroll" @mouseleave="closeUnroll">
@@ -59,13 +68,14 @@ function closeUnroll() {
 
       <!-- Research bar to search a book -->
       <input type="search" placeholder="Research a book" class="searchbar" />
-      <router-link to="/logIn" class="button">Log in</router-link>
+      <router-link :to="isLoggedIn ? '/account' : 'login'" class="button">{{ isLoggedIn  ? 'My account' : 'Log in' }}</router-link>
+
     </nav>
 
     <!-- Header for mobile -->
     <div id="tel">
       <div id="header_tel">
-        <router-link to="/" class="header_logo">
+        <router-link :to="isLoggedIn ? '/homepageloggedin' : '/'" class="header_logo">
           <img src="../assets/logo_header.svg" alt="Logo Hybread" />
         </router-link>
 
@@ -89,7 +99,7 @@ function closeUnroll() {
           placeholder="Research a book"
           class="mobile-searchbar"
         />
-        <router-link to="/logIn">Log in</router-link>
+        <router-link :to="isLoggedIn ? '/account' : 'login'">{{ isLoggedIn  ? 'My account' : 'Log in' }}</router-link>
       </nav>
     </div>
   </header>

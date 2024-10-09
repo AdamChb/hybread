@@ -1,6 +1,5 @@
 //Load File System, mysql2 and path module
 const fs = require("fs");
-const mysql = require("mysql2");
 const path = require("path");
 
 // Database connection
@@ -163,7 +162,7 @@ async function doAll() {
   };
 
   // Insert subjects into the database
-  //insertSubjects(Object.values(mapDb));
+  insertSubjects(Object.values(mapDb));
 
   for (const [apiSubject, dbSubject] of Object.entries(mapDb)) {
     // Get the list of books for the subject

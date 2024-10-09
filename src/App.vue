@@ -8,12 +8,26 @@ export default {
     HeaderHybRead,
     FooterHybRead,
   },
+  data() {
+    return {
+      isLoggedIn: false,
+      idUser: 0,
+      isAdmin: 0,
+    };
+  },
+  methods: {
+    loggedInUpdate(id, admin) {
+      this.id_user = id;
+      this.isAdmin = admin;
+      this.isLoggedIn = this.id_user ? true : false;
+    }
+  }
 };
 </script>
 
 <template>
-  <HeaderHybRead />
-  <router-view />
+  <HeaderHybRead :isLoggedIn="isLoggedIn"/>
+  <router-view :isLoggedIn="isLoggedIn" :idUser="idUser" :isAdmin="isAdmin" @loggedInUpdate="loggedInUpdate"/>
   <FooterHybRead />
   <nav>
     <router-link to="/">HomePage</router-link> |

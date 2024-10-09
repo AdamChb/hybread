@@ -1,46 +1,66 @@
-<!-- ------------------------------
-  Hybread - LogIn.vue
+<script>
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      message: "",
+    };
+  },
+  methods: {
+    async login(event) {
+      event.preventDefault()
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+        }),
+      });
 
-  Mathias BENOIT
-  Adam CHABA
-  Eva MAROT
-  Sacha PORTAL
+      const data = await response.json();
 
-  This view is the hpage where the user can log in
------------------------------- -->
-
-<!-- TEMP : js connexion -->
-<script setup></script>
+      if (response.ok) {
+        // Store the JWT token in localStorage
+        localStorage.setItem("token", data.token);
+        this.message = "Login successful";
+      } else {
+        this.message = "Login failed";
+      }
+    }
+  }
+}
+</script>
 
 <template>
   <div class="background">
     <div id="content">
       <div id="form">
         <h1 id="title">Log In</h1>
-        <!-- Form to get the username and password to log in -->
         <form>
-          <label for="username" class="subject">Username</label>
-          <input
-            class="input"
-            type="text"
-            id="username"
-            name="username"
-            required
-          />
+          <label for="email" class="subject">Email</label>
+          <input 
+            class="input" 
+            type="email" 
+            id="email" 
+            name="email" 
+            v-model="email"
+            required />
+          
           <label for="password" class="subject">Password</label>
           <input
             class="input"
             type="password"
             id="password"
             name="password"
+            v-model="password"
             required
           />
-          <!-- Button to sumit the form -->
-          <button type="submit" id="submit">Log In</button>
-          <!-- Link the the sign up page if the user doesn't have an account -->
+          <button @click="login" id="submit">Log In</button>
+          <p>{{ message }}</p>
           <p id="signup">
-            You don’t have an account ?
-            <router-link to="/signIn">Register now</router-link>
+            You don’t have an account ? <router-link to="/signIn">Register now</router-link>
           </p>
         </form>
       </div>
@@ -48,7 +68,6 @@
   </div>
 </template>
 
-<!-- Style of the page -->
 <style scoped>
 .background {
   background-image: url("../assets/bg.jpeg");
