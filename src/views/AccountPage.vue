@@ -19,97 +19,25 @@ export default {
     BookCard,
     ChartCategory,
   },
-  // TEMP : get data from bd
   data() {
     return {
-      books: [
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-      ],
+      books: [],
     };
   },
+  async beforeMount() {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("http://localhost:3000/api/auth/likedbooks", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    this.books = response.json();
+    console.log(this.books);
+  }  
 };
 </script>
 

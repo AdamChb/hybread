@@ -9,18 +9,147 @@
   This view is the page where the user see more information about a book
 ------------------------------ -->
 
+<script>
+export default {
+  name: "BookCard",
+  data() {
+    return {
+      book: {},
+      isAdmin: false,
+    };
+  },
+  async beforeMount() {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(atob(token.split(".")[1]));
+    console.log(user);
+
+    this.isAdmin = user.admin;
+    console.log(this.isAdmin);
+
+    const ID_Book = this.$route.query.id;
+
+    const response = await fetch(`http://localhost:3000/api/books/book/${ID_Book}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    this.book = data[0];
+    console.log(this.book);
+
+    const response_1 = await fetch(`http://localhost:3000/api/category/getcategory/${this.book.ID_Category}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data_1 = await response_1.json();
+    console.log(data_1);
+    this.book.Name_Category = data_1[0].Name_Category;
+  },
+  methods: {
+    async deleteBook() {
+      const response = await fetch("http://localhost:3000/api/books/deletebook", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          bookId: this.book.ID_Book,
+        }),
+      });
+
+      if (response.ok) {
+        this.$router.push("/homepageloggedin");
+      }
+    },
+    async changeBook() {
+      const response = await fetch("http://localhost:3000/api/books/modifybook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          ID_Book: this.book.ID_Book,
+          Name_Book: document.querySelector("input[id=Name_Book]").value,
+          Author: document.querySelector("input[id=Author]").value,
+          ID_Category: document.querySelector("input[id=Name_Category]").value,
+          Stock: document.querySelector("input[id=Stock]").value,
+          ISBN: document.querySelector("input[id=ISBN]").value,
+          Summary: document.querySelector("textarea[id=Summary]").value,
+        }),
+      });
+
+      if (response.ok) {
+        this.$router.push("/homepageloggedin");
+      }
+    },
+    async toLike(book) {
+      book.liked = !book.liked;
+      book.likes += 1;
+
+      const response = await fetch("http://localhost:3000/api/auth/likebook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          bookId: book.id,
+        }),
+      });
+
+      if (!response.ok) {
+        book.liked = !book.liked;
+        book.likes -= 1;
+      }
+    },
+    async unLike(book) {
+      book.liked = !book.liked;
+      book.likes -= 1;
+
+      const response = await fetch("http://localhost:3000/api/auth/unlikeBook", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          bookId: book.id,
+        }),
+      });
+
+      if (!response.ok) {
+        book.liked = !book.liked;
+        book.likes += 1;
+      }
+    },
+  },
+};
+</script>
+
 <template>
   <div class="background">
     <div id="book-view">
       <div class="bb-container">
-        <!-- Button to bring the user to the last page -->
-        <!-- TEMP - router vers la page précédente -->
-        <router-link to="/category" style="text-decoration: none">
+        <div class="buttons">
+          <!-- Button to bring the user to the last page -->
+        <router-link to="/homepageloggedin" style="text-decoration: none">
           <div class="cta-button">
             <img src="@/assets/back-arrow.svg" alt="arrow icon" />
             Return
           </div>
         </router-link>
+        <div class="admin-button" v-if="isAdmin">
+          <button class="cta-button" @click="deleteBook">Delete Book</button>
+          <button class="cta-button" @click="changeBook">Modify Book</button>
+        </div>
+        </div>
 
         <!-- Div that contains the book information -->
         <div class="book-container">
@@ -28,37 +157,81 @@
           <div class="book-image">
             <img src="book_cover.png" alt="Book Cover" />
           </div>
-          <!-- Book description -->
-          <div class="book-info">
-            <!-- TEMP : get book info from db based on which book we click on -->
+
+          <!-- First version: Static display with original code -->
+          <div class="book-info" v-if="!isAdmin">
             <div class="book-header">
-              <h2>Keleana - L'assassineuse Tome 1</h2>
-              <!-- TEMP : ajout coeur like -->
+              <h2>{{ book.Name_Book }}</h2>
               <div class="text">
-                <div class="author">from Sarah J Maas</div>
-                <div class="genre">Genre : Science Fiction</div>
+                <div class="author">from {{ book.Author }}</div>
+                <div class="genre">Genre : {{ book.Name_Category }}</div>
               </div>
             </div>
             <div class="book-details">
               <div class="text">
-                <p>Quantity available : 3<br />ISBN : 8928663</p>
+                <p>Quantity available : {{ book.Stock }}<br />ISBN : {{ book.ISBN }}</p>
+              </div>
+              <p class="book-description">{{ book.Summary }}</p>
+            </div>
+          </div>
+
+          <!-- Second version: Editable inputs with v-model -->
+          <div class="book-info" v-if="isAdmin">
+            <div class="book-header">
+              <h2>
+                <input
+                  id="Name_Book"
+                  type="text"
+                  :value="book.Name_Book"
+                  placeholder="Enter book name"
+                />
+              </h2>
+              <div class="text">
+                <div class="author">
+                  from
+                  <input
+                    id="Author"
+                    type="text"
+                    :value="book.Author"
+                    placeholder="Enter author's name"
+                  />
+                </div>
+                <div class="genre">
+                  Genre :
+                  <input
+                    id="Name_Category"
+                    type="text"
+                    :value="book.Name_Category"
+                    placeholder="Enter genre"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="book-details">
+              <div class="text">
+                <p>
+                  Quantity available :
+                  <input
+                    id="Stock"
+                    type="number"
+                    :value="book.Stock"
+                    placeholder="Enter quantity"
+                  /><br />
+                  ISBN :
+                  <input
+                    id="ISBN"
+                    type="text"
+                    :value="book.ISBN"
+                    placeholder="Enter ISBN"
+                  />
+                </p>
               </div>
               <p class="book-description">
-                À dix-huit ans seulement, Keleana est déjà l'assassineuse la
-                plus célèbre.<br /><br />Sa réputation a pourtant attiré
-                l’attention du prince Dorian qui lui propose de reconquérir sa
-                liberté. Pour cela, elle devra participer à un tournoi contre
-                les voleurs et les assassins les plus redoutables du royaume. Le
-                vainqueur sera sacré champion du roi et entrera à son service.
-                Les autres seront renvoyés à leur triste sort.<br /><br />
-
-                Pour Keleana, perdre n’est pas une option. Mais quand l’un de
-                ses adversaires est brutalement tué, puis un autre, elle
-                comprend que quelque chose de bien plus important qu’une simple
-                compétition se joue à la cour du roi.<br /><br />
-
-                Trouvera-t-elle le coupable avant de devenir victime à son tour
-                ?
+                <textarea
+                  id="Summary"
+                  :value="book.Summary"
+                  placeholder="Enter book summary"
+                ></textarea>
               </p>
             </div>
           </div>
@@ -76,6 +249,14 @@
   justify-content: center;
   align-items: flex-start;
 }
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .cta-button {
   box-sizing: border-box;
   border: 2px solid white;
@@ -100,6 +281,18 @@
 .cta-button img {
   width: 20px;
   margin-right: 10px;
+}
+
+.admin-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1em;
+}
+
+button.cta-button {
+  cursor: pointer;
+  font-size: 1em;
 }
 
 .background {
@@ -178,6 +371,12 @@
 .book-description {
   margin-top: 5px;
   color: #333;
+  min-height: 10em;
+}
+
+.book-description textarea {
+  width: 100%;
+  min-height: 100%;
 }
 
 /* Responsive */

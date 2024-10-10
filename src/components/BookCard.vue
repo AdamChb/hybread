@@ -18,27 +18,63 @@ export default {
     book: Object,
   },
   methods: {
-    toLike(book) {
+    async toLike(book) {
       book.liked = !book.liked;
       book.likes += 1;
+
+      const response = await fetch("http://localhost:3000/api/auth/likebook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          bookId: book.id,
+        }),
+      });
+
+      if (!response.ok) {
+        book.liked = !book.liked;
+        book.likes -= 1;
+      }
     },
-    unLike(book) {
+    async unLike(book) {
       book.liked = !book.liked;
       book.likes -= 1;
+
+      const response = await fetch("http://localhost:3000/api/auth/unlikeBook", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          bookId: book.id,
+        }),
+      });
+
+      if (!response.ok) {
+        book.liked = !book.liked;
+        book.likes += 1;
+      }
     },
+
+    goTo(bookId) {
+      this.$router.push({ name: "BookView", query: { id: bookId } });
+    }
   },
 };
 </script>
 
 <template>
   <div class="book">
-    <router-link to="/book" :book="book">
+    <div @click="goTo(book.id)">
       <div class="img">
         <img :src="book.cover" alt="book cover" />
       </div>
       <h3>{{ book.name }}</h3>
       <p class="author">{{ book.author }}</p>
-    </router-link>
+    </div>
 
     <!-- Display the number of likes of a book -->
     <div class="likes">

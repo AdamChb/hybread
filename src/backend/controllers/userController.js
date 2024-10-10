@@ -78,14 +78,14 @@ const loginUser = (req, res) => {
         }
   
         // Generate a JWT token
-        const token = jwt.sign({ id: user.id }, JWT_SECRET, {
+        const token = jwt.sign({ id: user.ID_Reader, admin: user.Admin }, JWT_SECRET, {
           expiresIn: "1h",
         });
   
         // Send the token and user info in the response
         return res.json({
           token,
-          user: { id: user.id, username: user.username },
+          user: { id: user.ID_Reader, username: user.Pseudo, admin: user.Admin },
         });
       });
     });
@@ -93,21 +93,74 @@ const loginUser = (req, res) => {
 
 // Get User Profile
 const getUserProfile = (req, res) => {
-    const userId = req.user.id; // Get user id from the JWT payload
-  
-    User.findUserById(userId, (error, user) => {
-      if (error) {
+  const userId = req.user.id; // Get user id from the JWT payload
+
+  User.findUserById(userId, (error, user) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Server error" });
+    }
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.json({ id: user.id, username: user.username });
+  });
+};
+
+// Get Liked Books
+const getLikedBooks = async (req, res) => {
+  const userId = req.user.id;
+
+  User.getLikedBooks(userId, (error, books) => {
+    if (error) {
         console.error(error);
         return res.status(500).json({ message: "Server error" });
-      }
-  
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-  
-      return res.json({ id: user.id, username: user.username });
-    });
-  };
-    
+    }
 
-module.exports = { registerUser, loginUser, getUserProfile }
+    if (!books) {
+      return res.status(404).json({ message: "Books not found" });
+    }
+
+    return res.json(books);
+  });
+}
+
+const likeBook = async (req, res) => {
+  const userId = req.user.id;
+  const bookId = req.body.bookId;
+
+  User.likeBook({ userId, bookId }, (error, result) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ success: false, message: "Server error" });
+    }
+
+    if (!result) {
+      return res.status(404).json({ success: false, message: "Can't like the book"});
+    }
+
+    return res.status(200).json({ success: true });
+  });
+}
+
+const unlikeBook = async (req, res) => {
+  const userId = req.user.id;
+  const bookId = req.body.bookId;
+
+  User.unlikeBook({ userId, bookId }, (error, result) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ success: false, message: "Server error" });
+    }
+
+    if (!result) {
+      return res.status(404).json({ success: false, message: "Can't unlike the book"});
+    }
+    return res.status(200).json({ success: true });
+  });
+}
+
+
+module.exports = { registerUser, loginUser, getUserProfile, getLikedBooks, likeBook, unlikeBook };

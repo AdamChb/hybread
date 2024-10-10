@@ -28,6 +28,7 @@ export default {
           author: "Anna Downes",
           likes: 1,
           liked: false,
+          id: 1,
         },
         {
           cover: "/book2.jpg",

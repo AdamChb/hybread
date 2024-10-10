@@ -4,9 +4,12 @@ const authenticateToken = require("../middleware/authMiddleware"); // Import you
 
 const router = express.Router();
 
-// Define the routes
+// user routes
 router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
 router.get("/profile", authenticateToken, userController.getUserProfile); // Protect the profile route
+router.get("/likedbooks", authenticateToken, userController.getLikedBooks);
+router.post("/likebook", authenticateToken, userController.likeBook);
+router.delete("/unlikebook", authenticateToken, userController.unlikeBook);
 
 module.exports = router;

@@ -7,6 +7,13 @@ export default {
       message: "",
     };
   },
+  beforeRouteEnter(to, from, next) {
+    // Stocker l'URL précédente dans localStorage ou un état global
+    if (from.path) {
+      localStorage.setItem("previousPage", from.path);
+    }
+    next();
+  },
   methods: {
     async login(event) {
       event.preventDefault()
@@ -25,6 +32,10 @@ export default {
         // Store the JWT token in localStorage
         localStorage.setItem("token", data.token);
         this.message = "Login successful";
+
+        const previousPage = localStorage.getItem("previousPage") === "/" ? "/homepageloggedin" : localStorage.getItem("previousPage");
+        
+        this.$router.push(previousPage);
       } else {
         this.message = "Login failed";
       }

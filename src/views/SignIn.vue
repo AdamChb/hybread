@@ -8,6 +8,13 @@ export default {
       repeat_password: "",
     };
   },
+  beforeRouteEnter(to, from, next) {
+    // Stocker l'URL précédente dans localStorage ou un état global
+    if (from.path) {
+      localStorage.setItem("previousPage", from.path);
+    }
+    next();
+  },
   methods: {
     async register(event) {
       event.preventDefault()
@@ -23,6 +30,28 @@ export default {
 
       if (response.ok) {
         this.message = "User registered successfully";
+
+        const response = await fetch("http://localhost:3000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: this.email,
+            password: this.password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Store the JWT token in localStorage
+          localStorage.setItem("token", data.token);
+        } else {
+          this.message = "Login failed";
+        }
+        
+        const previousPage = localStorage.getItem("previousPage") === "/" || localStorage.getItem("previousPage") === "/login" ? "/homepageloggedin" : localStorage.getItem("previousPage");
+        
+        this.$router.push(previousPage);
       } else {
         this.message = "User registration failed";
       }
