@@ -49,6 +49,7 @@ export default {
           this.message = "Login failed";
         }
         
+        this.$emit(`loggedInUpdate`);
         const previousPage = localStorage.getItem("previousPage") === "/" || localStorage.getItem("previousPage") === "/login" ? "/homepageloggedin" : localStorage.getItem("previousPage");
         
         this.$router.push(previousPage);

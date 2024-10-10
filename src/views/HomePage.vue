@@ -23,7 +23,7 @@ export default {
       books: [],
     };
   },
-  async beforeMount() {
+  async mounted() {
     const response = await fetch("http://localhost:3000/api/books/top");
     const data = await response.json();
     const bookList = data;

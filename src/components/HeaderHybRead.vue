@@ -42,11 +42,9 @@ function closeUnroll() {
 
 <script>
 export default {
-  computed: {
-    isLoggedIn() {
-      return localStorage.getItem("token") !== null;
-    },
-  },
+  props: {
+    isLoggedIn: Boolean,
+  }
 }
 </script>
 
@@ -54,7 +52,7 @@ export default {
   <header>
     <!-- Header for pc -->
     <nav id="pc">
-      <router-link :to="isLoggedIn ? '/homepageloggedin' : '/'" class="header_logo">
+      <router-link to='/' class="header_logo">
         <img src="../assets/logo_header.svg" alt="Logo Hybread" />
       </router-link>
       <div @mouseenter="openUnroll" @mouseleave="closeUnroll">

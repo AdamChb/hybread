@@ -11,15 +11,14 @@ export default {
   data() {
     return {
       isLoggedIn: false,
-      idUser: 0,
-      isAdmin: 0,
     };
   },
+  mounted() {
+    this.loggedInUpdate();
+  },
   methods: {
-    loggedInUpdate(id, admin) {
-      this.id_user = id;
-      this.isAdmin = admin;
-      this.isLoggedIn = this.id_user ? true : false;
+    loggedInUpdate() {
+      this.isLoggedIn =  localStorage.getItem("token") !== null;
     }
   }
 };
@@ -27,9 +26,9 @@ export default {
 
 <template>
   <HeaderHybRead :isLoggedIn="isLoggedIn"/>
-  <router-view :isLoggedIn="isLoggedIn" :idUser="idUser" :isAdmin="isAdmin" @loggedInUpdate="loggedInUpdate"/>
+  <router-view @loggedInUpdate="loggedInUpdate"/>
   <FooterHybRead />
-  <!-- <nav>
+  <nav>
     <router-link to="/">HomePage</router-link> |
     <router-link to="/category">CategoryPage</router-link> |
     <router-link to="/homepageloggedin">HomepageLoggedin</router-link> |
@@ -37,7 +36,7 @@ export default {
     <router-link to="/login">Login</router-link> |
     <router-link to="/account">AccountPage</router-link> |
     <router-link to="/book">Book</router-link> |
-  </nav> -->
+  </nav>
 </template>
 
 <style>

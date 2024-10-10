@@ -19,6 +19,9 @@ export default {
     BookCard,
     ChartCategory,
   },
+  props: {
+    isLoggedIn: Boolean,
+  },
   data() {
     return {
       books: [],
@@ -45,41 +48,54 @@ export default {
       this.books.push(data_1[0]);
       console.log(data_1);
     });
-  }  
+  },
+  methods: {
+    disconnect() {
+      localStorage.removeItem("token");
+      this.$emit(`loggedInUpdate`);
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
 <template>
   <div class="background">
     <div class="content">
-      <!-- Left block : user account and graph -->
-      <div class="left-block">
-        <div class="your-account">
-          <h2>Your account</h2>
-          <!-- Username change -->
-          <div class="input-group">
-            <input type="text" id="username" placeholder="Current username" />
-            <button>Change username</button>
+      <div class="account">
+        <!-- Left block : user account and graph -->
+        <div class="left-block">
+          <div class="your-account">
+            <h2>Your account</h2>
+            <!-- Username change -->
+            <div class="input-group">
+              <input type="text" id="username" placeholder="Current username" />
+              <button>Change username</button>
+            </div>
+            <!-- Password change -->
+            <div class="input-group">
+              <input type="password" id="password" placeholder="*************" />
+              <button>Change password</button>
+            </div>
           </div>
-          <!-- Password change -->
-          <div class="input-group">
-            <input type="password" id="password" placeholder="*************" />
-            <button>Change password</button>
+          <!-- Graph -->
+          <div class="graph">
+            <ChartCategory />
           </div>
         </div>
-        <!-- Graph -->
-        <div class="graph">
-          <ChartCategory />
+        <!-- Favourites section -->
+        <div class="favourites">
+          <h2>My favourites</h2>
+          <div class="shelf">
+            <div v-for="book in books" :key="book.id">
+              <BookCard :book="book" />
+            </div>
+          </div>
         </div>
       </div>
-      <!-- Favourites section -->
-      <div class="favourites">
-        <h2>My favourites</h2>
-        <div class="shelf">
-          <div v-for="book in books" :key="book.id">
-            <BookCard :book="book" />
-          </div>
-        </div>
+    
+      <div class="disconnect">
+        <button @click="disconnect">Disconnect</button>
       </div>
     </div>
   </div>
@@ -92,7 +108,7 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 93vh;
+  height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -102,12 +118,22 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex-direction: row;
+  flex-direction: column;
   height: auto;
   width: 100%;
   padding: 6vw 10vw;
   background: rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  gap: 2em;
+  padding-bottom: 2em;
+}
+
+.account {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
 }
 
 .left-block {
@@ -213,6 +239,33 @@ transition: .3s;
   color: black;
   height: 100%;
   overflow-y: scroll;
+}
+
+.disconnect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  width: 100%;
+}
+
+.disconnect button {
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 1em;
+  background-color: red;
+  display: inline-block;
+  padding: 0.5em 1em;
+  width: 10%;
+  text-align: center;
+  border-radius: 0.4em;
+  color: white;
+  transition: 0.3s;
+  border: none;
+}
+
+.disconnect button:hover {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 1050px) {
