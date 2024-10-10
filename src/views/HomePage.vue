@@ -20,52 +20,23 @@ export default {
   //TEMP : get book from database
   data() {
     return {
-      books: [
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-      ],
+      books: [],
     };
   },
+  async beforeMount() {
+    const response = await fetch("http://localhost:3000/api/books/top");
+    const data = await response.json();
+    const bookList = data;
+    console.log(bookList);
+    
+    bookList.forEach(async (book) => {
+      console.log(book);
+      const response_1 = await fetch(`http://localhost:3000/api/books/book/${book.Id_Book}`);
+      const data_1 = await response_1.json();
+      this.books.push(data_1[0]);
+      console.log(data_1);
+    });
+  }
 };
 </script>
 

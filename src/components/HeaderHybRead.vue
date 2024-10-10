@@ -13,6 +13,7 @@
 import { ref } from "vue";
 let i = ref(0);
 let timeoutId = null;
+
 const toggleMenu = () => {
   document.querySelector(".header_nav_burger").classList.toggle("closethegate");
   document.querySelector(".header_nav_burger").classList.toggle("openthegate");
@@ -41,10 +42,11 @@ function closeUnroll() {
 
 <script>
 export default {
-  props: {
-    isLoggedIn: Boolean,
-    isAdmin: Boolean,
-  }
+  computed: {
+    isLoggedIn() {
+      return localStorage.getItem("token") !== null;
+    },
+  },
 }
 </script>
 

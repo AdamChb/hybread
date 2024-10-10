@@ -7,6 +7,6 @@ const router = express.Router();
 // admin routes
 router.delete("/deletebook/:id", authenticateToken, adminController.deleteBook);
 router.post("/addbook", authenticateToken, adminController.addBook);
-router.put("/updatebook/:id", authenticateToken, adminController.updateBook);
+router.post("/modifybook/:id", authenticateToken, adminController.modifyBook);
 
 module.exports = router;

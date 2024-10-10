@@ -35,8 +35,16 @@ export default {
       },
     });
 
-    this.books = response.json();
-    console.log(this.books);
+    const bookList = await response.json();
+    console.log(bookList);
+
+    bookList.forEach(async (book) => {
+      console.log(book);
+      const response_1 = await fetch(`http://localhost:3000/api/books/book/${book.ID_Book}`);
+      const data_1 = await response_1.json();
+      this.books.push(data_1[0]);
+      console.log(data_1);
+    });
   }  
 };
 </script>

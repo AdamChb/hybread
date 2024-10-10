@@ -21,10 +21,8 @@ export default {
   async beforeMount() {
     const token = localStorage.getItem("token");
     const user = JSON.parse(atob(token.split(".")[1]));
-    console.log(user);
 
     this.isAdmin = user.admin;
-    console.log(this.isAdmin);
 
     const ID_Book = this.$route.query.id;
 
@@ -52,15 +50,14 @@ export default {
   },
   methods: {
     async deleteBook() {
-      const response = await fetch("http://localhost:3000/api/books/deletebook", {
+      const ID_Book = this.$route.query.id;
+
+      const response = await fetch(`http://localhost:3000/api/admin/deletebook/${ID_Book}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
         },
-        body: JSON.stringify({
-          bookId: this.book.ID_Book,
-        }),
       });
 
       if (response.ok) {
@@ -68,7 +65,9 @@ export default {
       }
     },
     async changeBook() {
-      const response = await fetch("http://localhost:3000/api/books/modifybook", {
+      const ID_Book = this.$route.query.id;
+      
+      const response = await fetch(`http://localhost:3000/api/admin/modifybook/${ID_Book}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,8 +77,8 @@ export default {
           ID_Book: this.book.ID_Book,
           Name_Book: document.querySelector("input[id=Name_Book]").value,
           Author: document.querySelector("input[id=Author]").value,
-          ID_Category: document.querySelector("input[id=Name_Category]").value,
-          Stock: document.querySelector("input[id=Stock]").value,
+          ID_Category: this.book.ID_Category,
+          Stock: Number(document.querySelector("input[id=Stock]").value),
           ISBN: document.querySelector("input[id=ISBN]").value,
           Summary: document.querySelector("textarea[id=Summary]").value,
         }),
@@ -155,7 +154,7 @@ export default {
         <div class="book-container">
           <!-- Book image -->
           <div class="book-image">
-            <img src="book_cover.png" alt="Book Cover" />
+            <img :src="'data:image/jpeg;base64,' + book.Cover_Book" alt="Book Cover" />
           </div>
 
           <!-- First version: Static display with original code -->

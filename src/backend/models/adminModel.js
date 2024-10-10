@@ -16,11 +16,13 @@ const deleteBook = async (info, callback) => {
     }
 };
 
-const modifyBook = async (info, callback) => {
+const modifyBook = async (info, bookID, callback) => {
+    console.log(info);
+    console.log(typeof(bookID));
     try {
         db.query(
-            `UPDATE Book SET Name_Book = ?, Author = ?, Summary = ?, ID_Category = ?, ISBN = ? WHERE Id_Book = ?`,
-            [info.Name_Book, info.Author, info.Summary, info.ID_Category, info.ISBN, info.ID_Book],
+            "UPDATE Book SET Name_Book = ?,Author = ?,Summary = ?,ID_Category = ?,ISBN = ?, Stock = ? WHERE ID_Book = ?",
+            [info.Name_Book, info.Author, info.Summary, info.ID_Category, info.ISBN, info.Stock, Number(bookID)],
             (err, results) => {
                 if (err) return callback(err, null);
                 callback(null, results);
@@ -35,8 +37,8 @@ const modifyBook = async (info, callback) => {
 const addBook = async (info, callback) => {
     try {
         db.query(
-            `INSERT INTO Book(Name_Book, Author, Summary, ID_Category, ISBN) VALUES (?,?,?,?,?)`,
-            [info.Name_Book, info.Author, info.Summary, info.ID_Category, info.ISBN],
+            `INSERT INTO Book(Name_Book, Author, Summary, ID_Category, Stock, ISBN) VALUES (?,?,?,?,?,?)`,
+            [info.Name_Book, info.Author, info.Summary, info.ID_Category, info.Stock, info.ISBN],
             (err, results) => {
                 if (err) return callback(err, null);
                 callback(null, results);

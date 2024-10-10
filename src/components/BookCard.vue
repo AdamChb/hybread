@@ -68,16 +68,16 @@ export default {
 
 <template>
   <div class="book">
-    <div @click="goTo(book.id)">
+    <div @click="goTo(book.Id_Book)">
       <div class="img">
-        <img :src="book.cover" alt="book cover" />
+        <img :src="'data:image/jpeg;base64,' + book.Cover_Book" alt="book cover" />
       </div>
-      <h3>{{ book.name }}</h3>
-      <p class="author">{{ book.author }}</p>
+      <h3>{{ book.Name_Book }}</h3>
+      <p class="author">by {{ book.Author }}</p>
     </div>
 
     <!-- Display the number of likes of a book -->
-    <div class="likes">
+    <!-- <div class="likes">
       <img
         v-show="!book.liked"
         @click="toLike(book)"
@@ -91,8 +91,7 @@ export default {
         alt="like icon"
       />
       {{ book.likes }}
-    </div>
-    {{ console.log() }}
+    </div> -->
   </div>
 </template>
 

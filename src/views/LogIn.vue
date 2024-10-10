@@ -33,7 +33,7 @@ export default {
         localStorage.setItem("token", data.token);
         this.message = "Login successful";
 
-        const previousPage = localStorage.getItem("previousPage") === "/" ? "/homepageloggedin" : localStorage.getItem("previousPage");
+        const previousPage = localStorage.getItem("previousPage") === "/" || localStorage.getItem("previousPage") === "/book" || localStorage.getItem("previousPage") === "/signup" ? "/homepageloggedin" : localStorage.getItem("previousPage");
         
         this.$router.push(previousPage);
       } else {

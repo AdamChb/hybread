@@ -59,7 +59,7 @@ const getBookCoverById = async (bookId, callback) => {
 
 const getBookById = async (bookId, callback) => {
     try {
-        db.query(`SELECT Name_Book, Author, Summary, ID_Category, Id_Book, ISBN FROM Book WHERE Id_Book = ${bookId}`, 
+        db.query(`SELECT Name_Book, Author, Summary, ID_Category, Id_Book, Cover_Book, ISBN FROM Book WHERE Id_Book = ${bookId}`, 
             [bookId],
             (err, book) => {
             if (err) {
@@ -67,6 +67,7 @@ const getBookById = async (bookId, callback) => {
                 callback(err, null);
             }
             else {
+                book[0].Cover_Book = book[0].Cover_Book.toString("base64")
                 callback(null, book);
             }
         });

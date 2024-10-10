@@ -7,6 +7,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const bookRoutes = require("./routes/bookRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 const PORT = 3000;
@@ -19,6 +20,7 @@ app.use(cors('*'))
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/category", categoryRoutes);
+app.use("/api/admin", adminRoutes)
 
 // Start the server
 app.listen(PORT, hostname, () => {

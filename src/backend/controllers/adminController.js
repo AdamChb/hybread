@@ -27,8 +27,9 @@ const modifyBook = async (req, res) => {
         return res.status(403).json({ message: "Unauthorized" });
     }
     try {
-        Admin.modifyBook(req.params.id, req.body, (err, book) => {
+        Admin.modifyBook(req.body, Number(req.params.id), (err, book) => {
             if (err) {
+                console.log("izuebhfsuidb");
                 res.status(500).json({ message: err.message });
             } else {
                 res.status(200).json(book);

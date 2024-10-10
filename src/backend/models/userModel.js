@@ -39,7 +39,7 @@ const createUser = (user, callback) => {
 const getLikedBooks = async (userId, callback) => {
     try {
         db.query(
-            `SELECT * FROM Book WHERE ID_Book IN (SELECT ID_Book FROM Favourite WHERE ID_Reader = ?)`,
+            `SELECT ID_Book FROM Book WHERE ID_Book IN (SELECT ID_Book FROM Favourite WHERE ID_Reader = ?)`,
             [userId],
             (err, results) => {
                 if (err) return callback(err, null);
