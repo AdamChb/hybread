@@ -36,13 +36,20 @@ export default {
             label: "Number of Books",
             data: [122, 87, 43, 153, 184],
             backgroundColor: [
-              "#D9D9D9",
-              "#93725B",
-              "#92877A",
-              "#F5E2C8",
-              "#6C6C6C",
+              "#3B8397",
+              "#479FA2",
+              "#5DB9A0",
+              "#87D296",
+              "#BCE78A",
             ],
-            hoverOffset: 4,
+            hoverOffset: 15,
+            hoverBackgroundColor: [
+              "#3B8397",
+              "#479FA2",
+              "#5DB9A0",
+              "#87D296",
+              "#BCE78A",
+            ],
           },
         ],
       },
@@ -50,10 +57,20 @@ export default {
         plugins: {
           legend: {
             display: true,
+            font: {
+              weight: "bold",
+              size: 14,
+            },
           },
           datalabels: {
-            display: false,
+            display: true,
+            color: "white",
+            font: {
+              weight: "bold",
+              size: 14,
+            },
           },
+          
         },
         responsive: true,
         maintainAspectRatio: false,

@@ -269,8 +269,8 @@ export default {
   backdrop-filter: blur(3px);
   background-color: rgba(255, 255, 255, 0.3);
   transition: 0.3s;
-  animation: fadeInLeft ease 1.5s;
   margin-bottom: 1em;
+  animation: fadeInLeft ease 1s;
 }
 .cta-button:hover {
   transform: scale(1.04);
@@ -324,6 +324,7 @@ button.cta-button {
   border-radius: 10px;
   width: 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInRight ease 1s;
 }
 
 .book-image img {
@@ -393,6 +394,13 @@ button.cta-button {
   .book-info {
     margin-left: 0;
     margin-top: 20px;
+  }
+  #book-view{
+    padding-top: 8em;
+    display: block;
+  }
+  .background {
+    height: auto;
   }
 }
 </style>

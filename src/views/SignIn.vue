@@ -73,6 +73,7 @@ export default {
           id="username"
           name="username"
           v-model="username"
+            placeholder="ex : pineapplelover"
           required
         />
 
@@ -82,6 +83,7 @@ export default {
           type="email" 
           id="email" 
           name="email" 
+          placeholder="ex : pineapple.lover@hybread.com" 
           v-model="email"
           required 
         />
@@ -93,21 +95,23 @@ export default {
           id="password"
           name="password"
           v-model="password"
+          placeholder="ex : PiNeApPlE4l!fe"
           required
         />
 
-        <label class="subject" for="repeat-password">Repeat Password</label>
+        <label class="subject" for="repeat-password">Confirm Password</label>
         <input
           class="input"
           type="password"
           id="repeat-password"
           name="repeat-password"
           v-model="repeat_password"
+          placeholder="ex : PiNeApPlE4l!fe (again)" 
           required
         />
-        <button @click="register" id="submit">Sign up</button>
+        <button @click="register" id="submit" class="button">Sign up</button>
         <p>{{ message }}</p>
-        <p id="login">You already have an account ? <router-link to="/logIn">Log in</router-link></p>
+        <p id="login">You already have an account? <router-link to="/logIn">Log in</router-link></p>
       </form>
     </div>
   </div>
@@ -145,6 +149,7 @@ export default {
   min-height: 40vh;
   background-color: #ffffff;
   border-radius: 25px;
+  animation: fadeInTop ease 1s;
 }
 #title {
   font-size: 1.5em;
@@ -164,17 +169,33 @@ export default {
   width: 100%;
   border-radius: 5px;
   border: 2px solid black;
+  transition: .3s;
+}
+input:hover, input:focus {
+transform: scale(1.03);
+transition: .3s;
 }
 
-#submit {
-  padding: 0.5em;
-  width: 17%;
-  border-radius: 15px;
+
+.button {
+  box-sizing: border-box;
+  font-weight: 400;
   background-color: #0a859a;
+  display: inline-block;
+  padding: 0.5em 1em;
+  width: 100%;
+  text-align: center;
+  border-radius: 0.4em;
   color: white;
-  font-weight: 600;
+  transition: 0.3s;
   border: none;
   cursor: pointer;
+  font-size: 1em;
+}
+
+.button:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
 }
 
 #login {

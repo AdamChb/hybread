@@ -240,6 +240,7 @@ export default {
   width: 100%;
   color: white;
   background: rgba(0, 0, 0, 0.3);
+  overflow-x: hidden;
 }
 .container3 {
   display: flex;
@@ -272,6 +273,7 @@ h1 {
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   overflow-y: scroll;
+  animation: fadeInRight ease 1s;
 }
 .filter {
   display: flex;
@@ -288,6 +290,7 @@ h1 {
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   height: 60vh;
+  animation: fadeInLeft ease 1s;
 }
 .labels {
   display: flex;
@@ -346,9 +349,9 @@ input[type="range"]:focus {
 }
 
 /* Responsive */
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1400px) {
   /* Switch the activated content when 
-  screen's width is lower than 1100px */
+  screen's width is lower than 1400px */
   .container1 {
     padding-top: 8em;
     justify-content: flex-start;

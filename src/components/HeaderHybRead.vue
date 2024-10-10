@@ -92,7 +92,7 @@ export default {
       <!-- Navigation bar for mobile -->
       <nav class="header_nav_burger closethegate">
         <router-link to="">Science Fiction</router-link>
-        <router-link to="">Mystery & Thriller</router-link>
+        <router-link to="/category">Mystery & Thriller</router-link>
         <router-link to="">Children's Books</router-link>
         <router-link to="">Educational</router-link>
         <router-link to="">Historical</router-link>
@@ -107,34 +107,8 @@ export default {
   </header>
 </template>
 
-<!-- Style of the header -->
-<style scoped>
-/* Animations */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes slideTop {
-  0% {
-    translate: 0 -100px;
-  }
-  100% {
-    translate: 0;
-  }
-}
 
+<style scoped>
 /* Styles of the header */
 header {
   background-color: white;
@@ -253,6 +227,7 @@ nav a,
   border-radius: 7px;
   padding: 1em;
   transition: 0.3s;
+  font-size: 1em;
 }
 
 .searchbar:hover {
@@ -443,9 +418,9 @@ header #tel img {
   transition: 0.3s;
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1050px) {
   /* Switch the activated content when 
-  screen's width is lower than 1000px */
+  screen's width is lower than 1050px */
   header #pc {
     display: none;
   }

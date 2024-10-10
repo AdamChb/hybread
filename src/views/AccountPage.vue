@@ -58,7 +58,7 @@ export default {
           <h2>Your account</h2>
           <!-- Username change -->
           <div class="input-group">
-            <input type="text" id="username" placeholder="CurrentUsername" />
+            <input type="text" id="username" placeholder="Current username" />
             <button>Change username</button>
           </div>
           <!-- Password change -->
@@ -105,14 +105,19 @@ export default {
   flex-direction: row;
   height: auto;
   width: 100%;
-  padding: 2em;
+  padding: 6vw 10vw;
   background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
 .left-block {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  justify-content: space-between;
+  width: 40%;
+  height: 72vh;
+  animation: fadeInLeft ease 1s;
+  margin-right: 1.5em;
 }
 
 .your-account {
@@ -123,7 +128,7 @@ export default {
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   border-radius: 0.4em;
   margin-bottom: 1.5em;
-  height: 26vh;
+  height: 35%;
 }
 
 .your-account h2 {
@@ -141,8 +146,14 @@ export default {
   width: 60%;
   padding: 0.5em;
   margin-right: 0.5em;
-  border: 1px solid #ddd;
+  border: 2px solid black;
   border-radius: 0.4em;
+  transition: .3s;
+}
+
+.input-group input:hover, .input-group input:focus {
+transform: scale(1.04);
+transition: .3s;
 }
 
 .input-group button {
@@ -152,6 +163,11 @@ export default {
   border: none;
   border-radius: 0.4em;
   cursor: pointer;
+  transition: 0.3s;
+}
+.input-group button:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
 }
 
 .graph {
@@ -161,25 +177,24 @@ export default {
   flex-direction: column;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   border-radius: 0.4em;
-  margin-bottom: 1.5em;
-  height: 47vh;
+  height: 60%;
 }
 
 .favourites {
   display: flex;
   flex-direction: column;
-  width: 65%;
-  height: 76.5vh;
+  width: 58%;
+  height: 72vh;
   background-color: white;
   color: black;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
   border-radius: 0.4em;
-  padding: 1.5em 0 !important;
-  padding-right: 0;
+  padding: 1.5em 0 0 0;
+  animation: fadeInRight ease 1s;
 }
 
 .favourites h2 {
-  margin-bottom: 1em;
+  margin-bottom: 0;
   padding-left: 1.5em;
 }
 
@@ -191,34 +206,37 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   text-align: left;
-  padding: 1em;
   padding-left: 0;
   width: 100%;
   border-radius: 0.4em;
   background-color: white;
   color: black;
-  height: 60vh;
+  height: 100%;
   overflow-y: scroll;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1050px) {
   .background {
-    height: 176vh;
+    height: auto;
   }
 
   .content {
     display: flex;
     flex-direction: column;
-    height: 176vh;
+    height: auto;
   }
 
   .left-block {
-    margin-top: 5em;
+    margin: 5em 0 1.5em 0;
     width: 100%;
+    height: auto;
   }
 
   .input-group {
     justify-content: center;
+  }
+  .your-account{
+    height: auto;
   }
 
   .favourites {
