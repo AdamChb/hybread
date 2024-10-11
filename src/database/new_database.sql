@@ -26,7 +26,6 @@ CREATE TABLE Book(
    Name_Book VARCHAR(200) NOT NULL,
    Author VARCHAR(50) NOT NULL,
    Summary VARCHAR(8000) NOT NULL,
-   Likes INT DEFAULT 0,
    Cover_Book VARCHAR(50),
    ID_Category INT NOT NULL,
    FOREIGN KEY(ID_Category) REFERENCES Category(ID_Category)
@@ -34,13 +33,9 @@ CREATE TABLE Book(
 
 CREATE TABLE Favourite(
    ID_Reader INT,
-   ISBN VARCHAR(50),
-   PRIMARY KEY(ID_Reader, ISBN),
+   Id_Book VARCHAR(50),
+   PRIMARY KEY(ID_Reader, Id_Book),
    FOREIGN KEY(ID_Reader) REFERENCES Reader(ID_Reader),
-   FOREIGN KEY(ISBN) REFERENCES Book(ISBN)
+   FOREIGN KEY(ISBN) REFERENCES Book(Id_Book)
 );
 
-
-CREATE USER 'hybread_root'@'localhost' IDENTIFIED BY 'efreihybread240';
-GRANT ALL PRIVILEGES ON hybread.* TO 'hybread_root'@'localhost';
-FLUSH PRIVILEGES;
