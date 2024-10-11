@@ -17,82 +17,68 @@ export default {
   components: {
     BookCard,
   },
-  // TEMP : data from db
+  props: {
+    isLoggedIn: Boolean,
+  },
   data() {
     return {
-      books: [
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-      ],
+      books: [],
+      category: {},
     };
+  },
+  methods: {
+    async getBooks() {
+      this.book = [];
+      
+      const token = localStorage.getItem("token");
+      let user;
+      if (token) {
+        user = JSON.parse(atob(token.split(".")[1]));
+      } else {
+        user = { id: 0};
+      }
+
+      const ID_Category = this.$route.query.id;
+
+      const response = await fetch(`http://localhost:3000/api/category/getcategory/${ID_Category}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      this.category = data[0];
+
+      const response_1 = await fetch(`http://localhost:3000/api/books/category/${this.category.ID_Category}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data_1 = await response_1.json();
+      this.booksId = data_1;
+
+      this.booksId.forEach(async (book) => {
+        const response_2 = await fetch(`http://localhost:3000/api/books/book/${user.id}/${book.Id_Book}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data_2 = await response_2.json();
+        book = data_2[0];
+        this.books.push(book);
+        console.log(book);
+      });
+    }
+  },
+  watch: {
+    '$route.query.id': {
+      handler: async function () {
+        await this.getBooks();
+      },
+      immediate: true, 
+    }
   },
 };
 </script>
@@ -101,11 +87,11 @@ export default {
   <div id="category">
     <div class="container">
       <!-- TEMP : name category -->
-      <h1>Mystery & Thriller</h1>
+      <h1>{{ category.Name_Category }}</h1>
       <!-- Books display -->
       <div class="shelf">
         <div v-for="book in books" :key="book.id">
-          <BookCard :book="book" />
+          <BookCard :book="book" :isLoggedIn="isLoggedIn"/>
         </div>
       </div>
     </div>

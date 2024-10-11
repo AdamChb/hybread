@@ -39,14 +39,19 @@ export default {
     });
 
     const bookList = await response.json();
-    console.log(bookList);
+
+    let user;
+    if (token) {
+      user = JSON.parse(atob(token.split(".")[1]));
+    } else {
+      user = { id: 0};
+    }
 
     bookList.forEach(async (book) => {
       console.log(book);
-      const response_1 = await fetch(`http://localhost:3000/api/books/book/${book.ID_Book}`);
+      const response_1 = await fetch(`http://localhost:3000/api/books/book/${user.id}/${book.ID_Book}`);
       const data_1 = await response_1.json();
       this.books.push(data_1[0]);
-      console.log(data_1);
     });
   },
   methods: {
@@ -88,7 +93,7 @@ export default {
           <h2>My favourites</h2>
           <div class="shelf">
             <div v-for="book in books" :key="book.id">
-              <BookCard :book="book" />
+              <BookCard :book="book" :isLoggedIn="isLoggedIn"/>
             </div>
           </div>
         </div>
@@ -256,7 +261,7 @@ transition: .3s;
   background-color: red;
   display: inline-block;
   padding: 0.5em 1em;
-  width: 10%;
+  width: fit-content;
   text-align: center;
   border-radius: 0.4em;
   color: white;

@@ -44,6 +44,11 @@ function closeUnroll() {
 export default {
   props: {
     isLoggedIn: Boolean,
+  },
+  methods: {
+    goTo(categoryId) {
+      this.$router.push({ name: "CategoryPage", query: { id: categoryId } });
+    }
   }
 }
 </script>
@@ -58,11 +63,11 @@ export default {
       <div @mouseenter="openUnroll" @mouseleave="closeUnroll">
         <div class="categories">Categories</div>
         <ul id="dropdown">
-          <li><router-link to="">Science Fiction</router-link></li>
-          <li><router-link to="/category">Mystery & Thriller</router-link></li>
-          <li><router-link to="">Children's Books</router-link></li>
-          <li><router-link to="">Educational</router-link></li>
-          <li><router-link to="">Historical</router-link></li>
+          <li><div @click="goTo(2)">Science Fiction</div></li>
+          <li><div @click="goTo(3)">Mystery & Thriller</div></li>
+          <li><div @click="goTo(1)">Children's Books</div></li>
+          <li><div @click="goTo(5)">Educational</div></li>
+          <li><div @click="goTo(4)">Historical</div></li>
         </ul>
       </div>
 
@@ -89,11 +94,11 @@ export default {
 
       <!-- Navigation bar for mobile -->
       <nav class="header_nav_burger closethegate">
-        <router-link to="">Science Fiction</router-link>
-        <router-link to="/category">Mystery & Thriller</router-link>
-        <router-link to="">Children's Books</router-link>
-        <router-link to="">Educational</router-link>
-        <router-link to="">Historical</router-link>
+        <div @click="goTo(2)">Science Fiction</div>
+        <div @click="goTo(3)">Mystery & Thriller</div>
+        <div @click="goTo(1)">Children's Books</div>
+        <div @click="goTo(5)">Educational</div>
+        <div @click="goTo(4)">Historical</div>
         <input
           type="search"
           placeholder="Research a book"
@@ -211,8 +216,9 @@ nav a,
   border-radius: 0.5em;
 }
 
-#pc ul li a {
+#pc ul li div {
   margin: 0;
+  padding-left: .5em;
 }
 
 /* Search bar's style */
@@ -358,7 +364,7 @@ header #pc img {
   transform: rotate(45deg) translate(-13px, -5px);
 }
 
-.header_nav_burger a {
+.header_nav_burger div, .header_nav_burger a {
   padding: 1.4em;
   font-weight: 400;
   margin-right: 0;
@@ -372,7 +378,7 @@ header #pc img {
   color: black;
   text-decoration: none;
 }
-.header_nav_burger a:hover {
+.header_nav_burger div:hover, .header_nav_burger a:hover {
   background-color: #effdff;
   transition: 0.3s;
 }

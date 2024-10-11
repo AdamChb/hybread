@@ -17,6 +17,9 @@ export default {
   components: {
     BookCard,
   },
+  props: {
+    isLoggedIn: Boolean,
+  },
   //TEMP : get book from database
   data() {
     return {
@@ -24,6 +27,14 @@ export default {
     };
   },
   async mounted() {
+    const token = localStorage.getItem("token");
+    let user;
+    if (token) {
+      user = JSON.parse(atob(token.split(".")[1]));
+    } else {
+      user = { id: 0};
+    }
+
     const response = await fetch("http://localhost:3000/api/books/top");
     const data = await response.json();
     const bookList = data;
@@ -31,7 +42,7 @@ export default {
     
     bookList.forEach(async (book) => {
       console.log(book);
-      const response_1 = await fetch(`http://localhost:3000/api/books/book/${book.Id_Book}`);
+      const response_1 = await fetch(`http://localhost:3000/api/books/book/${user.id}/${book.Id_Book}`);
       const data_1 = await response_1.json();
       this.books.push(data_1[0]);
       console.log(data_1);
@@ -65,7 +76,7 @@ export default {
     <div class="shelf">
       <div v-for="book in books" :key="book.id">
         <!-- Book card in component -->
-        <BookCard :book="book" />
+        <BookCard :book="book" :isLoggedIn="isLoggedIn"/>
       </div>
     </div>
   </div>

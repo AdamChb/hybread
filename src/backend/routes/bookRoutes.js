@@ -4,9 +4,10 @@ const bookController = require("../controllers/bookController"); // Import the c
 const router = express.Router();
 
 // book routes
-router.get("/", bookController.getBooks);
 router.get("/cover/:id", bookController.getBookCoverById);
-router.get("/book/:id", bookController.getBookById);
+router.get("/book/:userId/:bookId", bookController.getBookById);
+router.get("/category/:category", bookController.getBooksByCategory);
 router.get("/top", bookController.getTopBooks);
+router.get("/:limit", bookController.getBooks);
 
 module.exports = router;

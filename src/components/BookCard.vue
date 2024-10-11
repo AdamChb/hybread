@@ -16,12 +16,18 @@ export default {
   name: "BookCard",
   props: {
     book: Object,
+    isLoggedIn: Boolean,
   },
   methods: {
     async toLike(book) {
-      book.liked = !book.liked;
-      book.likes += 1;
+      if (!this.isLoggedIn) {
+        alert("You need to be logged in to like a recipe!");
+        return;
+      }
 
+      book.Has_Liked = !book.Has_Liked;
+      book.Total_Likes += 1;
+      
       const response = await fetch("http://localhost:3000/api/auth/likebook", {
         method: "POST",
         headers: {
@@ -29,18 +35,23 @@ export default {
           Authorization: localStorage.getItem("token"),
         },
         body: JSON.stringify({
-          bookId: book.id,
+          bookId: book.Id_Book,
         }),
       });
 
       if (!response.ok) {
-        book.liked = !book.liked;
-        book.likes -= 1;
+        book.Has_Liked = !book.Has_Liked;
+        book.Total_Likes -= 1;
       }
     },
     async unLike(book) {
-      book.liked = !book.liked;
-      book.likes -= 1;
+      if (!this.isLoggedIn) {
+        alert("You need to be logged in to like a recipe!");
+        return;
+      }
+
+      book.Has_Liked = !book.Has_Liked;
+      book.Total_Likes -= 1;
 
       const response = await fetch("http://localhost:3000/api/auth/unlikeBook", {
         method: "DELETE",
@@ -49,13 +60,13 @@ export default {
           Authorization: localStorage.getItem("token"),
         },
         body: JSON.stringify({
-          bookId: book.id,
+          bookId: book.Id_Book,
         }),
       });
 
       if (!response.ok) {
-        book.liked = !book.liked;
-        book.likes += 1;
+        book.Has_Liked = !book.Has_Liked;
+        book.Total_Likes += 1;
       }
     },
 
@@ -77,21 +88,21 @@ export default {
     </div>
 
     <!-- Display the number of likes of a book -->
-    <!-- <div class="likes">
+    <div class="likes">
       <img
-        v-show="!book.liked"
+        v-show="!book.Has_Liked"
         @click="toLike(book)"
         src="../assets/not-liked.svg"
         alt="like icon"
       />
       <img
-        v-show="book.liked"
+        v-show="book.Has_Liked"
         @click="unLike(book)"
         src="../assets/liked.svg"
         alt="like icon"
       />
-      {{ book.likes }}
-    </div> -->
+      {{ book.Total_Likes }}
+    </div>
   </div>
 </template>
 

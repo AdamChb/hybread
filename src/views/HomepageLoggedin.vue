@@ -17,99 +17,35 @@ export default {
   components: {
     BookCard,
   },
+  props: {
+    isLoggedIn: Boolean,
+  },
   // TEMP : data from db
   data() {
     return {
       quantity: 0,
-      books: [
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-          id: 1,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-        {
-          cover: "/book1.jpg",
-          name: "The Safe Place",
-          author: "Anna Downes",
-          likes: 1,
-          liked: false,
-        },
-        {
-          cover: "/book2.jpg",
-          name: "House of Glass",
-          author: "Sarah Pekkanen",
-          likes: 2,
-          liked: false,
-        },
-        {
-          cover: "/book3.jpg",
-          name: "Till Death Do Us Part",
-          author: "Laure Elizabeth Flynn",
-          likes: 3,
-          liked: false,
-        },
-      ],
+      books: [],
     };
   },
+  async beforeMount() {
+    const token = localStorage.getItem("token");
+    let user;
+    if (token) {
+      user = JSON.parse(atob(token.split(".")[1]));
+    } else {
+      user = { id: 0};
+    }
+
+    const response = await fetch(`http://localhost:3000/api/books/${20}`);
+    const data = await response.json();
+    
+    data.forEach(async (bookId) => {
+      const response = await fetch(`http://localhost:3000/api/books/book/${user.id}/${bookId.Id_Book}`);
+      const book = await response.json();
+      console.log(book);
+      this.books.push(book[0]);
+    });
+  }
 };
 </script>
 
@@ -178,7 +114,7 @@ export default {
         <!-- Display the books -->
         <div class="shelf">
           <div v-for="book in books" :key="book.id">
-            <BookCard :book="book" />
+            <BookCard :book="book" :isLoggedIn="isLoggedIn"/>
           </div>
         </div>
       </div>

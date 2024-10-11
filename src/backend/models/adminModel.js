@@ -1,10 +1,10 @@
 const db = require("../serverLogs");
 
-const deleteBook = async (info, callback) => {
+const deleteBook = async (bookId, callback) => {
     try {
         db.query(
-            `DELETE FROM Book WHERE Id_Book = ?`,
-            [info.bookId],
+            `DELETE FROM Book WHERE ID_Book = ?`,
+            [bookId],
             (err, results) => {
                 if (err) return callback(err, null);
                 callback(null, results);
@@ -18,11 +18,10 @@ const deleteBook = async (info, callback) => {
 
 const modifyBook = async (info, bookID, callback) => {
     console.log(info);
-    console.log(typeof(bookID));
     try {
         db.query(
             "UPDATE Book SET Name_Book = ?,Author = ?,Summary = ?,ID_Category = ?,ISBN = ?, Stock = ? WHERE ID_Book = ?",
-            [info.Name_Book, info.Author, info.Summary, info.ID_Category, info.ISBN, info.Stock, Number(bookID)],
+            [info.Name_Book, info.Author, info.Summary, info.ID_Category, info.ISBN, info.Stock, bookID],
             (err, results) => {
                 if (err) return callback(err, null);
                 callback(null, results);

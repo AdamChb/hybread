@@ -2,7 +2,7 @@ const Books = require('../models/bookModel');
 
 const getBooks = async (req, res) => {
     try {
-        Books.getBooks((err, books) => {
+        Books.getBooks(Number(req.params.limit), (err, books) => {
             if (err) {
                 res.status(500).json({ message: err.message });
             } else {
@@ -43,12 +43,17 @@ const getBookCoverById = async (req, res) => {
 };
 
 const getBookById = async (req, res) => {
+    const info = {
+        ID_Reader: req.params.userId,
+        ID_Book: req.params.bookId
+    }
+
     try {
-        Books.getBookById(req.params.id, (err, book) => {
+        Books.getBookById(info, (err, book) => {
             if (err) {
                 res.status(500).json({ message: err.message });
             } else {
-                res.status(200).json(book);
+                res.json(book);
             }
         });
     } catch (error) {

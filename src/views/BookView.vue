@@ -12,21 +12,41 @@
 <script>
 export default {
   name: "BookCard",
+  props: {
+    isLoggedIn: Boolean,
+  },
   data() {
     return {
-      book: {},
+      book: {
+        ID_Book: 0,
+        Name_Book: "",
+        Author_Book: "",
+        ID_Category: 0,
+        Stock: 0,
+        ISBN: "",
+        Summary: "",
+        Cover_Book: "",
+        Has_Liked: false,
+        Total_Likes: 0,
+        Name_Category: "",
+      },
       isAdmin: false,
     };
   },
   async beforeMount() {
     const token = localStorage.getItem("token");
-    const user = JSON.parse(atob(token.split(".")[1]));
+    let user;
+    if (token) {
+      user = JSON.parse(atob(token.split(".")[1]));
+    } else {
+      user = { id: 0};
+    }
 
     this.isAdmin = user.admin;
 
     const ID_Book = this.$route.query.id;
 
-    const response = await fetch(`http://localhost:3000/api/books/book/${ID_Book}`, {
+    const response = await fetch(`http://localhost:3000/api/books/book/${user.id}/${ID_Book}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,18 +55,7 @@ export default {
 
     const data = await response.json();
     this.book = data[0];
-    console.log(this.book);
-
-    const response_1 = await fetch(`http://localhost:3000/api/category/getcategory/${this.book.ID_Category}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data_1 = await response_1.json();
-    console.log(data_1);
-    this.book.Name_Category = data_1[0].Name_Category;
+    console.log(this.book)
   },
   methods: {
     async deleteBook() {
@@ -77,7 +86,7 @@ export default {
           ID_Book: this.book.ID_Book,
           Name_Book: document.querySelector("input[id=Name_Book]").value,
           Author: document.querySelector("input[id=Author]").value,
-          ID_Category: this.book.ID_Category,
+          ID_Category: document.querySelector("select[id=genre]").value,
           Stock: Number(document.querySelector("input[id=Stock]").value),
           ISBN: document.querySelector("input[id=ISBN]").value,
           Summary: document.querySelector("textarea[id=Summary]").value,
@@ -88,10 +97,16 @@ export default {
         this.$router.push("/homepageloggedin");
       }
     },
-    async toLike(book) {
-      book.liked = !book.liked;
-      book.likes += 1;
 
+    async toLike() {
+      if (!this.isLoggedIn) {
+        alert("You need to be logged in to like a recipe!");
+        return;
+      }
+
+      this.book.Has_Liked = !this.book.Has_Liked;
+      this.book.Total_Likes += 1;
+      
       const response = await fetch("http://localhost:3000/api/auth/likebook", {
         method: "POST",
         headers: {
@@ -99,18 +114,23 @@ export default {
           Authorization: localStorage.getItem("token"),
         },
         body: JSON.stringify({
-          bookId: book.id,
+          bookId: this.book.Id_Book,
         }),
       });
 
       if (!response.ok) {
-        book.liked = !book.liked;
-        book.likes -= 1;
+        this.book.Has_Liked = !this.book.Has_Liked;
+        this.book.Total_Likes -= 1;
       }
     },
-    async unLike(book) {
-      book.liked = !book.liked;
-      book.likes -= 1;
+    async unLike() {
+      if (!this.isLoggedIn) {
+        alert("You need to be logged in to like a recipe!");
+        return;
+      }
+
+      this.book.Has_Liked = !this.book.Has_Liked;
+      this.book.Total_Likes -= 1;
 
       const response = await fetch("http://localhost:3000/api/auth/unlikeBook", {
         method: "DELETE",
@@ -119,13 +139,13 @@ export default {
           Authorization: localStorage.getItem("token"),
         },
         body: JSON.stringify({
-          bookId: book.id,
+          bookId: this.book.Id_Book,
         }),
       });
 
       if (!response.ok) {
-        book.liked = !book.liked;
-        book.likes += 1;
+        this.book.Has_Liked = !this.book.Has_Liked;
+        this.book.Total_Likes += 1;
       }
     },
   },
@@ -166,6 +186,22 @@ export default {
                 <div class="genre">Genre : {{ book.Name_Category }}</div>
               </div>
             </div>
+            <!-- Display the number of likes of a book -->
+            <div class="likes">
+              <img
+                v-show="!book.Has_Liked"
+                @click="toLike()"
+                src="../assets/not-liked.svg"
+                alt="like icon"
+              />
+              <img
+                v-show="book.Has_Liked"
+                @click="unLike()"
+                src="../assets/liked.svg"
+                alt="like icon"
+              />
+              {{ book.Total_Likes }}
+            </div>
             <div class="book-details">
               <div class="text">
                 <p>Quantity available : {{ book.Stock }}<br />ISBN : {{ book.ISBN }}</p>
@@ -197,12 +233,13 @@ export default {
                 </div>
                 <div class="genre">
                   Genre :
-                  <input
-                    id="Name_Category"
-                    type="text"
-                    :value="book.Name_Category"
-                    placeholder="Enter genre"
-                  />
+                  <select name="category" id="genre" :value="book.ID_Category">
+                    <option value="1">Children's books</option>
+                    <option value="2">Science fiction</option>
+                    <option value="3">Mercedes</option>
+                    <option value="4">Thriller</option>
+                    <option value="5">Educational</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -308,6 +345,7 @@ button.cta-button {
 
 #book-view {
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -362,6 +400,19 @@ button.cta-button {
 .genre {
   text-align: right;
   flex-wrap: wrap;
+}
+
+.likes {
+  padding-top: .5em;
+  font-weight: 700;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.likes img {
+  width: 1em;
+  margin-right: 0.2em;
 }
 
 .book-details {

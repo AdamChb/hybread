@@ -26,7 +26,7 @@ export default {
 
 <template>
   <HeaderHybRead :isLoggedIn="isLoggedIn"/>
-  <router-view @loggedInUpdate="loggedInUpdate"/>
+  <router-view @loggedInUpdate="loggedInUpdate" :isLoggedIn="isLoggedIn"/>
   <FooterHybRead />
   <nav>
     <router-link to="/">HomePage</router-link> |

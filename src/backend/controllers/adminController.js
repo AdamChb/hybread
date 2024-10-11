@@ -29,7 +29,6 @@ const modifyBook = async (req, res) => {
     try {
         Admin.modifyBook(req.body, Number(req.params.id), (err, book) => {
             if (err) {
-                console.log("izuebhfsuidb");
                 res.status(500).json({ message: err.message });
             } else {
                 res.status(200).json(book);
