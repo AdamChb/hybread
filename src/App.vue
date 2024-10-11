@@ -28,15 +28,6 @@ export default {
   <HeaderHybRead :isLoggedIn="isLoggedIn"/>
   <router-view @loggedInUpdate="loggedInUpdate" :isLoggedIn="isLoggedIn"/>
   <FooterHybRead />
-  <nav>
-    <router-link to="/">HomePage</router-link> |
-    <router-link to="/category">CategoryPage</router-link> |
-    <router-link to="/homepageloggedin">HomepageLoggedin</router-link> |
-    <router-link to="/signin">SignIn</router-link> |
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/account">AccountPage</router-link> |
-    <router-link to="/book">Book</router-link> |
-  </nav>
 </template>
 
 <style>
@@ -45,9 +36,6 @@ export default {
   font-family: inter;
   box-sizing: border-box;
   margin: 0;
-  /* scrollbar-color:  #effdff;
-  scrollbar-width: thin; */
-
 }
 
 ::-webkit-scrollbar-thumb {

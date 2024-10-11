@@ -15,26 +15,44 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 export default {
   name: "DonutChart",
-  mounted() {
+  async mounted() {
     Chart.register(...registerables);
     Chart.register(ChartDataLabels);
 
     const ctx = document.getElementById("myDonutChart").getContext("2d");
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("http://localhost:3000/api/chart/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    })
+    const rawData = await response.json();
+    console.log(rawData);
+
+    let data = [];
+    rawData.forEach(category => {
+      data.push(Number(category.Number_of_Liked_Books));      
+    });
+    console.log(data);
+    
 
     new Chart(ctx, {
       type: "doughnut",
       data: {
         labels: [
           "Children's Books",
+          "Science Fiction",
+          "Mystery & Thriller",
           "Historical",
           "Educational",
-          "Mystery & Thriller",
-          "Science Fiction",
         ],
         datasets: [
           {
             label: "Number of Books",
-            data: [122, 87, 43, 153, 184],
+            data: data,
             backgroundColor: [
               "#3B8397",
               "#479FA2",

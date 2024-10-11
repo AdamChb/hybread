@@ -79,13 +79,13 @@ const loginUser = (req, res) => {
   
         // Generate a JWT token
         const token = jwt.sign({ id: user.ID_Reader, admin: user.Admin }, JWT_SECRET, {
-          expiresIn: "1h",
+          expiresIn: "6h",
         });
   
         // Send the token and user info in the response
         return res.json({
           token,
-          user: { id: user.ID_Reader, username: user.Pseudo, admin: user.Admin },
+          user: { id: user.ID_Reader, admin: user.Admin },
         });
       });
     });
@@ -162,5 +162,95 @@ const unlikeBook = async (req, res) => {
   });
 }
 
+const updatePassword = async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const user = req.user;
 
-module.exports = { registerUser, loginUser, getUserProfile, getLikedBooks, likeBook, unlikeBook };
+  User.findUserById(user.id, (error, dbUser) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Server error" });
+    }
+
+    if (!dbUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    bcrypt.compare(oldPassword, dbUser.Password, (err, isMatch) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+      }
+
+      if (!isMatch) {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+
+      bcrypt.hash(newPassword, 10, (error, hashedPassword) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({ message: "Server Error" });
+        }
+
+        User.updatePassword({ userId: user.id, password: hashedPassword }, (updateErr, result) => {
+          if (updateErr) {
+            console.error(updateErr);
+            return res.status(500).json({ message: "Server Error" });
+          }
+
+          return res.status(200).json(result);
+        });
+      });
+    });
+  });
+}
+
+const updateEmail = async (req, res) => {
+  const { password, email } = req.body;
+  const user = req.user;
+
+  User.findUserById(user.id, (error, dbUser) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Server error" });
+    }
+
+    if (!dbUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    console.log(password, dbUser);
+    
+    bcrypt.compare(password, dbUser.Password, (err, isMatch) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error" });
+      }
+
+      if (!isMatch) {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+
+      User.updateEmail({ userId: user.id, email: email }, (updateErr, result) => {
+        if (updateErr) {
+          console.error(updateErr);
+          return res.status(500).json({ message: "Server Error" });
+        }
+
+        return res.status(200).json(result);
+      });
+    });
+  });
+}
+
+
+module.exports = { 
+  registerUser, 
+  loginUser, 
+  getUserProfile, 
+  getLikedBooks, 
+  likeBook, 
+  unlikeBook, 
+  updatePassword,
+  updateEmail,
+};

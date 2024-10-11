@@ -11,5 +11,7 @@ router.get("/profile", authenticateToken, userController.getUserProfile); // Pro
 router.get("/likedbooks", authenticateToken, userController.getLikedBooks);
 router.post("/likebook", authenticateToken, userController.likeBook);
 router.delete("/unlikebook", authenticateToken, userController.unlikeBook);
+router.post("/updatepassword", authenticateToken, userController.updatePassword);
+router.post("/updateemail", authenticateToken, userController.updateEmail);
 
 module.exports = router;

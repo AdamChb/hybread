@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const bookRoutes = require("./routes/bookRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const chartRoutes = require("./routes/chartRoutes");
 
 const app = express();
 const PORT = 3000;
@@ -21,6 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/admin", adminRoutes)
+app.use("/api/chart", chartRoutes)
 
 // Start the server
 app.listen(PORT, hostname, () => {

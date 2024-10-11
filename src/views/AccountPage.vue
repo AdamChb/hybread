@@ -60,6 +60,44 @@ export default {
       this.$emit(`loggedInUpdate`);
       this.$router.push("/");
     },
+    changePassword() {
+      const oldPassword = prompt("Enter your current password : ", "");
+
+      const password = document.getElementById("password").value;
+      document.getElementById("password").value = "";
+      const token = localStorage.getItem("token");
+
+      fetch("http://localhost:3000/api/auth/updatepassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify({ 
+          newPassword: password,
+          oldPassword: oldPassword,
+        }),
+      });
+    },
+    changeEmail() {
+      const password = prompt("Enter your password : ", "");
+
+      const email = document.getElementById("email").value;
+      document.getElementById("email").value = "";
+      const token = localStorage.getItem("token");
+
+      fetch("http://localhost:3000/api/auth/updateemail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify({ 
+          password: password,
+          email: email,
+        }),
+      });
+    }
   },
 };
 </script>
@@ -74,13 +112,13 @@ export default {
             <h2>Your account</h2>
             <!-- Username change -->
             <div class="input-group">
-              <input type="text" id="username" placeholder="Current username" />
-              <button>Change username</button>
+              <input type="text" id="email" placeholder="Current email" />
+              <button @click="changeEmail">Change username</button>
             </div>
             <!-- Password change -->
             <div class="input-group">
               <input type="password" id="password" placeholder="*************" />
-              <button>Change password</button>
+              <button @click="changePassword">Change password</button>
             </div>
           </div>
           <!-- Graph -->

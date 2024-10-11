@@ -84,5 +84,46 @@ const unlikeBook = async (info, callback) => {
     }
 }
 
+const updatePassword = async (info, callback) => {
+    try {
+        db.query(
+            `UPDATE Reader SET Password = ? WHERE ID_Reader = ?`,
+            [info.password, info.userId],
+            (err, results) => {
+                if (err) return callback(err, null);
+                callback(null, results);
+            }
+        )
+    } catch (err) {
+        console.log(err);
+        callback(err, null);
+    }
+}
 
-module.exports = { findUserByEmail, findUserById, createUser, getLikedBooks, likeBook, unlikeBook }
+const updateEmail = async (info, callback) => {
+    try {
+        db.query(
+            `UPDATE Reader SET Email = ? WHERE ID_Reader = ?`,
+            [info.email, info.userId],
+            (err, results) => {
+                if (err) return callback(err, null);
+                callback(null, results);
+            }
+        )
+    } catch (err) {
+        console.log(err);
+        callback(err, null);
+    }
+}
+
+
+module.exports = { 
+    findUserByEmail, 
+    findUserById, 
+    createUser, 
+    getLikedBooks, 
+    likeBook, 
+    unlikeBook, 
+    updatePassword,
+    updateEmail,
+}
