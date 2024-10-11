@@ -4,6 +4,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const multer = require('multer');
+const path = require('path');
 const authRoutes = require("./routes/authRoutes");
 const bookRoutes = require("./routes/bookRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
@@ -23,6 +25,23 @@ app.use("/api/books", bookRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/admin", adminRoutes)
 app.use("/api/chart", chartRoutes)
+
+// Configurer le stockage des fichiers
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'dossier_destination/'); // Remplacez par votre dossier de destination
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Ajoutez un horodatage au nom du fichier
+  },
+});
+
+const upload = multer({ storage });
+
+// Endpoint pour télécharger le fichier
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  res.status(200).send('Fichier téléchargé avec succès !');
+});
 
 // Start the server
 app.listen(PORT, hostname, () => {

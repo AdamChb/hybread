@@ -8,6 +8,7 @@ router.get("/cover/:id", bookController.getBookCoverById);
 router.get("/book/:userId/:bookId", bookController.getBookById);
 router.get("/category/:category", bookController.getBooksByCategory);
 router.get("/top", bookController.getTopBooks);
-router.get("/:limit", bookController.getBooks);
+router.get("/search", bookController.searchBooks);
+router.get("/books/:limit", bookController.getBooks);
 
 module.exports = router;

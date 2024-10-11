@@ -59,5 +59,25 @@ const addBook = async (req, res) => {
     }
 };
 
-module.exports = { deleteBook, modifyBook, addBook };
+const addBookCover = async (req, res) => {
+    const isAdmin = req.user.admin;
+
+    if (!isAdmin) {
+        return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    try {
+        Admin.addBookCover(req.body, (err, book) => {
+            if (err) {
+                res.status(500).json({ message: err.message });
+            } else {
+                res.status(200).json(book);
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports = { deleteBook, modifyBook, addBook, addBookCover };
 

@@ -218,8 +218,6 @@ const updateEmail = async (req, res) => {
     if (!dbUser) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    console.log(password, dbUser);
     
     bcrypt.compare(password, dbUser.Password, (err, isMatch) => {
       if (err) {

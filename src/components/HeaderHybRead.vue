@@ -48,8 +48,20 @@ export default {
   methods: {
     goTo(categoryId) {
       this.$router.push({ name: "CategoryPage", query: { id: categoryId } });
-    }
-  }
+    },
+    searchBook() {
+      try {
+        this.$router.push({ name: "HomepageLoggedin", query: { search: this.search } });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  data() {
+    return {
+      search: "",
+    };
+  },
 }
 </script>
 
@@ -72,7 +84,13 @@ export default {
       </div>
 
       <!-- Research bar to search a book -->
-      <input type="search" placeholder="Research a book" class="searchbar" />
+      <input
+      type="search"
+      placeholder="Research a book"
+      class="searchbar"
+      v-model="search"
+      @keyup.enter="searchBook"
+      />
       <router-link :to="isLoggedIn ? '/account' : 'login'" class="button">{{ isLoggedIn  ? 'My account' : 'Log in' }}</router-link>
 
     </nav>
@@ -103,6 +121,8 @@ export default {
           type="search"
           placeholder="Research a book"
           class="mobile-searchbar"
+          v-model="search"
+          @keyup.enter="searchBook"
         />
         <router-link :to="isLoggedIn ? '/account' : 'login'">{{ isLoggedIn  ? 'My account' : 'Log in' }}</router-link>
       </nav>

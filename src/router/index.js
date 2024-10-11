@@ -36,6 +36,11 @@ const routes = [
     name: "AccountPage",
     component: () => import("../views/AccountPage.vue"),
   },
+  {
+    path: "/addbook",
+    name: "AddBook",
+    component: () => import("../views/AddBook.vue"),
+  },
 ];
 
 const router = createRouter({

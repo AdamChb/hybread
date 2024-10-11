@@ -19,5 +19,23 @@ const getCategoryById = async (categoryID, callback) => {
     }   
 }
 
+const getCategories = async (callback) => {
+    try {
+        db.query("SELECT * FROM Category", 
+            (err, categories) => {
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            }
+            else {
+                callback(null, categories);
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        callback(err, null);
+    }   
+}
 
-module.exports = { getCategoryById }
+
+module.exports = { getCategoryById, getCategories };

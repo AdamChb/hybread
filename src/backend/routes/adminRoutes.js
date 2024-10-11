@@ -8,5 +8,6 @@ const router = express.Router();
 router.delete("/deletebook/:id", authenticateToken, adminController.deleteBook);
 router.post("/addbook", authenticateToken, adminController.addBook);
 router.post("/modifybook/:id", authenticateToken, adminController.modifyBook);
+router.post("/addbookcover", authenticateToken, adminController.addBookCover);
 
 module.exports = router;

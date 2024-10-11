@@ -1,14 +1,3 @@
-<!-- ------------------------------
-  Hybread - HomepageLoggedin.vue
-
-  Mathias BENOIT
-  Adam CHABA
-  Eva MAROT
-  Sacha PORTAL
-
-  This view is the page where the user arrives when he logs in
------------------------------- -->
-
 <script>
 import BookCard from "@/components/BookCard.vue";
 
@@ -20,31 +9,73 @@ export default {
   props: {
     isLoggedIn: Boolean,
   },
-  // TEMP : data from db
   data() {
     return {
       quantity: 0,
       books: [],
+      categories: [],
+      selectedCategory: '',
+      fetchIteration: 0,
     };
   },
   async beforeMount() {
-    const token = localStorage.getItem("token");
-    let user;
-    if (token) {
-      user = JSON.parse(atob(token.split(".")[1]));
-    } else {
-      user = { id: 0};
-    }
+    await this.fetchCategories();
+    await this.fetchBooks();
+  },
+  watch: {
+    '$route.query.search': 'fetchBooks',
+    selectedCategory: 'fetchBooks',
+    quantity: 'fetchBooks'
+  },
+  methods: {
+    async fetchCategories() {
+      const response = await fetch("http://localhost:3000/api/category/getcategories");
+      const data = await response.json();
+      this.categories = data;
+    },
+    async fetchBooks() {
+      this.fetchIteration++;
+      let startFetchIteration = this.fetchIteration;
+      const token = localStorage.getItem("token");
+      let user;
+      if (token) {
+        user = JSON.parse(atob(token.split(".")[1]));
+      } else {
+        user = { id: 0 };
+      }
 
-    const response = await fetch(`http://localhost:3000/api/books/${20}`);
-    const data = await response.json();
-    
-    data.forEach(async (bookId) => {
-      const response = await fetch(`http://localhost:3000/api/books/book/${user.id}/${bookId.Id_Book}`);
-      const book = await response.json();
-      console.log(book);
-      this.books.push(book[0]);
-    });
+      const searchQuery = this.$route.query.search;
+      let url = `http://localhost:3000/api/books/search?quantity=${this.quantity}`;
+
+      if (searchQuery) {
+        url += `&query=${searchQuery}`;
+      }
+
+      if (this.selectedCategory) {
+        url += `&category=${this.selectedCategory}`;
+      }
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.length === 0) {
+          this.books = [];
+        } else {
+          this.books = [];
+          for (const bookId of data) {
+            if (startFetchIteration !== this.fetchIteration) {
+              return;
+            }
+            const response = await fetch(`http://localhost:3000/api/books/book/${user.id}/${bookId.Id_Book}`);
+            const book = await response.json();
+            this.books.push(book[0]);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 };
 </script>
@@ -59,61 +90,32 @@ export default {
           <!-- Filter by category -->
           <h3>Category</h3>
           <div class="labels">
-            <label>
+            <label v-for="category in categories" :key="category.ID_Category">
               <input
                 type="radio"
                 name="category"
-                value="science-fiction"
+                :value="category.ID_Category"
                 v-model="selectedCategory"
               />
-              Science Fiction
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="category"
-                value="mystery-thriller"
-                v-model="selectedCategory"
-              />
-              Mystery & Thriller
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="category"
-                value="childrens-books"
-                v-model="selectedCategory"
-              />
-              Children's Books
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="category"
-                value="educational"
-                v-model="selectedCategory"
-              />
-              Educational
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="category"
-                value="historical"
-                v-model="selectedCategory"
-              />
-              Historical
+              {{ category.Name_Category }}
             </label>
           </div>
           <!-- Filter by quantity/stock -->
           <h3>Minimal Quantity</h3>
           <input type="range" min="0" max="50" v-model="quantity" />
           <p>{{ quantity }}</p>
+
+          <router-link to="/addbook">
+            <button class="addBook" v-if="isLoggedIn">Add a book</button>
+          </router-link>
         </div>
 
         <!-- Display the books -->
         <div class="shelf">
-          <div v-for="book in books" :key="book.id">
+          <div v-if="books.length === 0">
+            <h2>No books found</h2>
+          </div>
+          <div v-else v-for="book in books" :key="book.id">
             <BookCard :book="book" :isLoggedIn="isLoggedIn"/>
           </div>
         </div>
@@ -122,7 +124,6 @@ export default {
   </div>
 </template>
 
-<!-- Style of the page -->
 <style scoped>
 /* Animations */
 @keyframes fadeIn {
@@ -282,6 +283,22 @@ input[type="range"]::-webkit-slider-thumb {
 }
 input[type="range"]:focus {
   outline: none;
+}
+
+.addBook {
+  background-color: #0a859a;
+  color: white;
+  border: none;
+  border-radius: 0.4em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 1em;
+}
+
+.addBook:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
 }
 
 /* Responsive */

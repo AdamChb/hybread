@@ -99,7 +99,7 @@ const getBookById = async (info, callback) => {
                 callback(err, null);
             }
             else {
-                book[0].Cover_Book = book[0].Cover_Book.toString("base64")
+                book[0].Cover_Book = book[0].Cover_Book?.toString("base64")
                 callback(null, book);
             }
         });
@@ -129,4 +129,40 @@ const getMostLikedBooks = async (callback) => {
     }
 }
 
-module.exports = { getBooks, getBookCoverById, getBooksByCategory, getBookById, getMostLikedBooks };
+const searchBooks = async (query, category, quantity, callback) => {
+    try {
+        if (!query) {
+            query = "";
+        }
+        // Construct the base query
+        let sqlQuery = `SELECT Id_Book FROM Book WHERE (Name_Book LIKE ?)`;
+        let queryParams = [`%${query}%`];
+
+        // Add category filter if provided
+        if (category) {
+            sqlQuery += ` AND Id_Category = ?`;
+            queryParams.push(category);
+        }
+
+        // Add quantity filter if provided
+        if (quantity) {
+            sqlQuery += ` AND Stock >= ?`;
+            queryParams.push(quantity);
+        }
+
+        // Execute the query
+        db.query(sqlQuery, queryParams, (err, books) => {
+            if (err) {
+                console.log(err);
+                callback(err, null);
+            } else {
+                callback(null, books);
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        callback(err, null);
+    }
+};
+
+module.exports = { getBooks, getBookCoverById, getBooksByCategory, getBookById, getMostLikedBooks, searchBooks };
